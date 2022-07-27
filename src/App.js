@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
-
+import './fonts/space age.ttf';
+// import Home from './Routes/test';
+import Home from './Routes/Home';
+import { createTheme, ThemeProvider } from '@mui/material';
+import Register from './Routes/Register';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Posts from './components/Posts';
+import { useGlobalContext } from './context';
 function App() {
+  const { darkMode } = useGlobalContext();
+  const homeTheme = createTheme({
+    palette: {
+      mode: darkMode ? 'dark' : 'light',
+      primary: {
+        main: '#1178f2',
+        icons: 'white',
+      },
+      secondary: {
+        main: '#fafafa',
+      },
+    },
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ThemeProvider theme={homeTheme}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />}>
+              <Route path=":main/:sub" element={<Posts />} />
+              <Route path="profile" element={<h2>Profile area</h2>} />
+            </Route>
+            <Route path="register" element={<Register />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
+    </>
   );
 }
 
