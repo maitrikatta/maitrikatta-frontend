@@ -8,11 +8,17 @@ function Hero({ children }) {
       <Paper
         component="main"
         sx={{
-          height: 100,
+          display: 'flex',
+          flexDirection: 'row',
+          gap: 2,
+          p: 2,
+          flexWrap: 'wrap',
+          justifyContent: { sm: 'center' },
           ml: { sm: `${drawerWidth}px` },
+          boxShadow: 1,
         }}
         square
-        elevation={16}
+        elevation={4}
       >
         {children}
       </Paper>

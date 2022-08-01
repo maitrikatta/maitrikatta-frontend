@@ -33,13 +33,16 @@ function MyDrawer() {
         <SideBarMenu />
       </Drawer>
       <Drawer
-        elevation={4}
         variant="permanent"
         sx={{
           display: { xs: 'none', sm: 'block' },
-          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+          '& .MuiDrawer-paper': {
+            boxSizing: 'border-box',
+            height: '100%',
+            width: drawerWidth,
+          },
         }}
-        open
+        open={true}
       >
         <SideBarMenu />
       </Drawer>

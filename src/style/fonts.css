@@ -6,3 +6,7 @@
   font-family: 'apollo';
   src: url('../fonts/APOLLO.otf');
 }
+body {
+  padding: 0 !important;
+  overflow: auto !important;
+}

@@ -13,8 +13,8 @@ import {
   Typography,
 } from '@mui/material';
 import Switch, { SwitchProps } from '@mui/material/Switch';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandCircleDownOutlinedIcon from '@mui/icons-material/ExpandCircleDownOutlined';
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
 import list from '../Lists/sidebarList';
 import { useGlobalContext } from '../context';
 import { NavLink } from 'react-router-dom';
@@ -62,12 +62,17 @@ function SideBarMenu() {
                 selected={activeListItem === index}
                 divider={true}
                 disablePadding
+                sx={{
+                  '&.Mui-selected': {
+                    backgroundColor: 'primary.mainTrans',
+                  },
+                }}
               >
                 <ListItemButton onClick={() => handleActiveList(index)}>
                   <ListItemIcon
                     sx={{
-                      '.MuiListItemIcon-root': {
-                        color: 'rgba(0, 0, 0, 0.9)',
+                      '&.MuiListItemIcon-root': {
+                        color: activeListItem === index && 'primary.brand',
                       },
                     }}
                   >
@@ -78,19 +83,22 @@ function SideBarMenu() {
                       sx={{
                         fontFamily: 'apollo',
                         letterSpacing: '2px',
+                        '&.MuiTypography-root': {
+                          color: activeListItem === index && 'primary.white',
+                        },
                       }}
                     >
                       {item.mainItemText}
                     </Typography>
                   </ListItemText>
                   {activeListItem === index ? (
-                    <ExpandLess />
+                    <RemoveIcon />
                   ) : (
-                    <ExpandCircleDownOutlinedIcon
+                    <AddIcon
                       style={{
                         color: !darkMode
-                          ? 'rgba(0, 0, 0, 0.6)'
-                          : 'rgba(250, 250, 250, 0.6)',
+                          ? 'rgba(0, 0, 0, 0.5)'
+                          : 'rgba(250, 250, 250, 0.5)',
                       }}
                     />
                   )}
@@ -113,13 +121,15 @@ function SideBarMenu() {
                           onClick={handleDrawerToggle}
                           aria-label="yogesh"
                           disablePadding
+                          inputProps={{
+                            MenuProps: { disableScrollLock: true },
+                          }}
                         >
                           <ListItemButton
                             sx={{
                               pl: 3,
                               '&.MuiListItemButton-root': { pr: 0 },
                             }}
-                            dense={true}
                           >
                             <ListItemText>
                               <Typography

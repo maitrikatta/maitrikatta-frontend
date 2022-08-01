@@ -1,11 +1,11 @@
 import React from 'react';
-import { AppBar, Toolbar, IconButton, Typography } from '@mui/material';
+import { AppBar, Toolbar, IconButton, Typography, Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useGlobalContext } from '../context';
 import { drawerWidth } from './MyDrawer';
 function MyAppBar() {
   const { handleDrawerToggle, darkMode } = useGlobalContext();
-  const myColor = !darkMode && '#3A3845';
+  const myColor = !darkMode && 'white';
   return (
     <AppBar
       position="fixed"
@@ -21,20 +21,32 @@ function MyAppBar() {
           gap: 2,
         }}
       >
-        <IconButton
+        <Button
           onClick={handleDrawerToggle}
+          variant="outlined"
           sx={{
             display: { sm: 'none' },
-            color: 'primary.icons',
+            color: 'primary.brand',
+            border: '1px solid rgba(255,255,255,0.4)',
+            borderRadius: '10px',
+            '&.MuiButton-root': {
+              padding: '3px',
+              minWidth: 'auto',
+            },
+            '&.MuiButton-root:hover': {
+              border: '1px solid rgba(255,255,255,0.8)',
+              backgroundColor: 'rgba(230, 230, 230,0.1)',
+            },
           }}
           size="large"
         >
           <MenuIcon size="small" />
-        </IconButton>
+        </Button>
         <Typography
           sx={{
             fontFamily: 'space',
             letterSpacing: { sm: '5px', xs: '2px' },
+            color: { sm: !darkMode && 'black' },
           }}
           variant="h6"
         >
