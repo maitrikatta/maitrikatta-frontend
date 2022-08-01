@@ -11,15 +11,15 @@ import Art from '../assets/icons/art';
 import Movie from '../assets/icons/movie';
 import Sport from '../assets/icons/sport';
 const list = [
-  {
-    mainItemText: 'Agriculture',
-    mainItemIcon: <AgricultureOutlinedIcon />,
-    subItem: [
-      { text: 'Globe', path: 'Agriculture/Globe' },
-      { text: 'Machines', path: 'Agriculture/Machines' },
-      { text: 'Crops', path: 'Agriculture/Crops' },
-    ],
-  },
+  // {
+  //   mainItemText: 'Agriculture',
+  //   mainItemIcon: <AgricultureOutlinedIcon />,
+  //   subItem: [
+  //     { text: 'Globe', path: 'Agriculture/Globe' },
+  //     { text: 'Machines', path: 'Agriculture/Machines' },
+  //     { text: 'Crops', path: 'Agriculture/Crops' },
+  //   ],
+  // },
   {
     mainItemText: 'Education',
     mainItemIcon: <SchoolOutlinedIcon />,
@@ -58,28 +58,28 @@ const list = [
       },
     ],
   },
-  {
-    mainItemText: 'Entertainment',
-    mainItemIcon: <LiveTvOutlinedIcon />,
-    subItem: [
-      {
-        text: 'Movies',
-        subItemIcon: <Movie />,
-        path: 'Entertainment/Movies',
-      },
-      { text: 'Sport', subItemIcon: <Sport />, path: 'Entertainment/Sport' },
-      { text: 'Celebrities', path: 'Entertainment/Celebrities' },
-    ],
-  },
-  {
-    mainItemText: 'Technology',
-    mainItemIcon: <LaptopChromebookOutlinedIcon />,
-    subItem: [
-      { text: 'Mobiles & Laptops', path: 'Technology/mobile-and-laptop' },
-      { text: 'Accessories', path: 'Technology/accessories' },
-      { text: 'Blogs', path: 'Technology/blogs' },
-    ],
-  },
+  // {
+  //   mainItemText: 'Entertainment',
+  //   mainItemIcon: <LiveTvOutlinedIcon />,
+  //   subItem: [
+  //     {
+  //       text: 'Movies',
+  //       subItemIcon: <Movie />,
+  //       path: 'Entertainment/Movies',
+  //     },
+  //     { text: 'Sport', subItemIcon: <Sport />, path: 'Entertainment/Sport' },
+  //     { text: 'Celebrities', path: 'Entertainment/Celebrities' },
+  //   ],
+  // },
+  // {
+  //   mainItemText: 'Technology',
+  //   mainItemIcon: <LaptopChromebookOutlinedIcon />,
+  //   subItem: [
+  //     { text: 'Mobiles & Laptops', path: 'Technology/mobile-and-laptop' },
+  //     { text: 'Accessories', path: 'Technology/accessories' },
+  //     { text: 'Blogs', path: 'Technology/blogs' },
+  //   ],
+  // },
 ];
 
 export default list;
