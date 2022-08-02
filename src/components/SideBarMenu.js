@@ -109,6 +109,7 @@ function SideBarMenu() {
                 unmountOnExit
                 in={activeListItem === index}
               >
+                {/* sub items list  */}
                 <List component="div">
                   {item.subItem.map((subItem, index) => {
                     return (
@@ -121,7 +122,7 @@ function SideBarMenu() {
                           onClick={handleDrawerToggle}
                           aria-label="yogesh"
                           disablePadding
-                          inputProps={{
+                          inputprops={{
                             MenuProps: { disableScrollLock: true },
                           }}
                         >

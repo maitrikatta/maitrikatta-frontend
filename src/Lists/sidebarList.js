@@ -21,6 +21,21 @@ const list = [
   //   ],
   // },
   {
+    mainItemText: 'Account',
+    mainItemIcon: <SchoolOutlinedIcon />,
+    subItem: [
+      {
+        text: 'Profile',
+        path: 'account/profile',
+      },
+      {
+        text: 'Post',
+        path: 'account/Post',
+      },
+      { text: 'Feed', path: 'account/Feed' },
+    ],
+  },
+  {
     mainItemText: 'Education',
     mainItemIcon: <SchoolOutlinedIcon />,
     subItem: [
