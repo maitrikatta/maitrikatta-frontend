@@ -121,7 +121,7 @@ function SideBarMenu() {
                           onClick={handleDrawerToggle}
                           aria-label="yogesh"
                           disablePadding
-                          inputProps={{
+                          inputprops={{
                             MenuProps: { disableScrollLock: true },
                           }}
                         >
