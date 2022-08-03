@@ -15,10 +15,10 @@ function Hero({ children }) {
           flexWrap: 'wrap',
           justifyContent: { sm: 'center' },
           ml: { sm: `${drawerWidth}px` },
-          boxShadow: 1,
+          boxShadow: 0,
         }}
         square
-        elevation={4}
+        elevation={18}
       >
         {children}
       </Paper>

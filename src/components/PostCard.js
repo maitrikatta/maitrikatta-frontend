@@ -2,6 +2,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import ShareIcon from '@mui/icons-material/Share';
 import { red } from '@mui/material/colors';
+import customAxios from '../axios/authAxios';
+import { useEffect, useState } from 'react';
 import {
   Avatar,
   Button,
@@ -13,15 +15,20 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
-function PostCard({
-  createdBy,
-  PostHeading,
-  Comments,
-  Content,
-  picturePath,
-  Likes,
-}) {
-  console.log(createdBy);
+function PostCard({ createdBy, PostHeading, Content, picturePath }) {
+  const [profilePath, setProfilePath] = useState('');
+  const [userName, setUserName] = useState('');
+  async function fetchUser() {
+    const response = await customAxios(`/profile/${createdBy}`);
+    if (response.data) {
+      const { profilePath, username } = response.data;
+      setProfilePath(profilePath);
+      setUserName(username);
+    }
+  }
+  useEffect(() => {
+    fetchUser();
+  }, [createdBy]);
   return (
     <Card
       elevation={24}
@@ -33,7 +40,7 @@ function PostCard({
     >
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} src={picturePath}>
+          <Avatar sx={{ bgcolor: red[500] }} src={profilePath}>
             Y
           </Avatar>
         }
@@ -43,7 +50,7 @@ function PostCard({
           </IconButton>
         }
         title={PostHeading}
-        subheader="Yogesh kakde"
+        subheader={userName}
       ></CardHeader>
       <CardMedia
         component="img"

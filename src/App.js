@@ -1,11 +1,13 @@
 import './fonts/space age.ttf';
 // import Home from './Routes/test';
 import Home from './Routes/Home';
+import Profile from './Routes/Profile';
 import { createTheme, ThemeProvider } from '@mui/material';
 import Register from './Routes/Register';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Posts from './components/Posts';
 import { useGlobalContext } from './context';
+import Login from './Routes/Login';
 function App() {
   const { darkMode } = useGlobalContext();
   const homeTheme = createTheme({
@@ -29,8 +31,9 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />}>
               <Route path=":main/:sub" element={<Posts />} />
-              <Route path="profile" element={<h2>Profile area</h2>} />
+              <Route path="profile" element={<Profile />} />
             </Route>
+            <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
           </Routes>
         </BrowserRouter>

@@ -1,15 +1,15 @@
-import AgricultureOutlinedIcon from '@mui/icons-material/AgricultureOutlined';
+// import AgricultureOutlinedIcon from '@mui/icons-material/AgricultureOutlined';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
-import LiveTvOutlinedIcon from '@mui/icons-material/LiveTvOutlined';
+// import LiveTvOutlinedIcon from '@mui/icons-material/LiveTvOutlined';
 import LaptopChromebookOutlinedIcon from '@mui/icons-material/LaptopChromebookOutlined';
 import NewspaperOutlinedIcon from '@mui/icons-material/NewspaperOutlined';
 import CurrencyRupeeOutlinedIcon from '@mui/icons-material/CurrencyRupeeOutlined';
 import ScienceOutlinedIcon from '@mui/icons-material/ScienceOutlined';
 import Geo from '../assets/icons/geo';
 import Art from '../assets/icons/art';
-import Movie from '../assets/icons/movie';
-import Sport from '../assets/icons/sport';
+// import Movie from '../assets/icons/movie';
+// import Sport from '../assets/icons/sport';
 const list = [
   // {
   //   mainItemText: 'Agriculture',
@@ -26,13 +26,13 @@ const list = [
     subItem: [
       {
         text: 'Profile',
-        path: 'account/profile',
+        path: 'profile',
       },
       {
         text: 'Post',
-        path: 'account/Post',
+        path: 'Post',
       },
-      { text: 'Feed', path: 'account/Feed' },
+      { text: 'Feed', path: 'Feed' },
     ],
   },
   {
