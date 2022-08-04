@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import customAxios from '../axios/authAxios';
 import {
   Paper,
@@ -11,6 +12,7 @@ import {
 } from '@mui/material';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 function Profile() {
+  const navigate = useNavigate();
   const [data, setData] = useState('');
   const [name, setName] = useState('');
   const [bio, setBio] = useState(
@@ -25,7 +27,9 @@ function Profile() {
       setBio(data.bioStatus);
       setCollege(data.college);
     } catch (error) {
-      console.log(error);
+      if (error.response.status === 401) {
+        navigate('/login', { replace: true });
+      }
     }
   }
   useEffect(() => {

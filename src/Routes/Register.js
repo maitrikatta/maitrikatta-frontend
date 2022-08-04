@@ -1,11 +1,23 @@
 import React, { useState, useRef } from 'react';
+import noAuthAxios from '../axios/noAuthAxios';
+import { useNavigate } from 'react-router-dom';
+import ErrorIcon from '@mui/icons-material/Error';
 import register from '../style/register.module.css';
-import { TextField, InputAdornment, Button } from '@mui/material';
+import {
+  TextField,
+  InputAdornment,
+  Button,
+  Icon,
+  Typography,
+} from '@mui/material';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import AlternateEmailOutlinedIcon from '@mui/icons-material/AlternateEmailOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Box } from '@mui/system';
 function Register() {
+  const [axiosError, setAxiosError] = useState(false);
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -19,6 +31,19 @@ function Register() {
   const [hide, setHide] = useState(true);
   const nameRef = useRef('');
   const passRef = useRef('');
+  const sendData = async () => {
+    try {
+      const response = await noAuthAxios.post('/auth/register', { ...form });
+      if (response.status === 201) {
+        localStorage.setItem('token', 'Bearer ' + response.data.token);
+        navigate('/Education/Science', { replace: true });
+      }
+    } catch (error) {
+      if (error.response.status === 400) {
+        setAxiosError(error.response.data.msg);
+      }
+    }
+  };
   const validate = function (ev) {
     ev.preventDefault();
     const { name, password } = form;
@@ -80,12 +105,33 @@ function Register() {
     setError((prevState) => {
       return { ...prevState, passwordErr: null };
     });
+
+    sendData();
   };
 
   return (
     <section className={register.wrapper}>
       <form action="#" onSubmit={(e) => validate(e)} className={register.left}>
         <div className={register.snippet_wrapper}>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 1,
+              alignSelf: 'stretch',
+              textAlign: 'center',
+              height: '30px',
+              '&.MuiBox-root': {
+                bgcolor: '#f44336',
+              },
+              visibility: axiosError ? 'unset' : 'hidden',
+            }}
+          >
+            <Icon sx={{ ml: 1, color: 'white' }}>
+              <ErrorIcon />
+            </Icon>
+            <Typography sx={{ color: 'white' }}>{axiosError}</Typography>
+          </Box>
           <div className={register.snippet}>
             <p className={register.heading}>maitrikatta</p>
           </div>
@@ -116,9 +162,10 @@ function Register() {
           </div>
           <div className={register.snippet}>
             <TextField
-              onChange={(e) =>
-                setForm({ ...form, email: e.target.value.trim() })
-              }
+              onChange={(e) => {
+                setForm({ ...form, email: e.target.value.trim() });
+                setAxiosError(false);
+              }}
               variant="outlined"
               label="email"
               placeholder="enter your email"

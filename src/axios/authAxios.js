@@ -8,12 +8,11 @@ authAxios.interceptors.request.use(
     return request;
   },
   (error) => {
-    console.log(error);
+    console.log(`auth not found :${error}`);
   }
 );
 authAxios.interceptors.response.use(
   (response) => {
-    console(response);
     return response;
   },
   (error) => {

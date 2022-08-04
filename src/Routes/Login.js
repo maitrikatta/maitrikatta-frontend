@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import register from '../style/register.module.css';
 import {
   Box,
@@ -13,7 +14,8 @@ import AlternateEmailOutlinedIcon from '@mui/icons-material/AlternateEmailOutlin
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import noAuthAxios from '../axios/noAuthAxios';
 import ErrorIcon from '@mui/icons-material/Error';
-function Register() {
+function Login() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     email: '',
     password: '',
@@ -36,7 +38,7 @@ function Register() {
       });
       const token = response.data.token;
       localStorage.setItem('token', 'Bearer ' + token);
-      console.log(localStorage.getItem('token'));
+      navigate('/profile', { replace: true });
     } catch (error) {
       if (error.response.status === 401) {
         setAxiosError((prevState) => {
@@ -198,4 +200,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Login;
