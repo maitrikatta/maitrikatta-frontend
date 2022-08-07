@@ -18,17 +18,20 @@ import {
 function PostCard({ createdBy, PostHeading, Content, picturePath }) {
   const [profilePath, setProfilePath] = useState('');
   const [userName, setUserName] = useState('');
+  const ellipse = PostHeading.length > 30 ? '...' : '';
   async function fetchUser() {
     const response = await customAxios(`/profile/${createdBy}`);
+    const { data } = await customAxios(`/profile/login/${createdBy}`);
+    setUserName(data?.name);
+
     if (response.data) {
-      const { profilePath, username } = response.data;
+      const { profilePath } = response.data;
       setProfilePath(profilePath);
-      setUserName(username);
     }
   }
   useEffect(() => {
     fetchUser();
-  }, [createdBy]);
+  }, []);
   return (
     <Card
       elevation={24}
@@ -49,7 +52,7 @@ function PostCard({ createdBy, PostHeading, Content, picturePath }) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={PostHeading}
+        title={`${PostHeading.substring(0, 30)} ${ellipse}`}
         subheader={userName}
       ></CardHeader>
       <CardMedia
@@ -60,7 +63,7 @@ function PostCard({ createdBy, PostHeading, Content, picturePath }) {
       />
       <CardContent>
         <Typography variant="body2" sx={{ textAlign: 'justify' }}>
-          {Content}
+          {`${Content.substring(0, 309)}...`}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

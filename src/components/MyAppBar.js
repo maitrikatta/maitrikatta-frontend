@@ -26,7 +26,7 @@ function MyAppBar() {
           variant="outlined"
           sx={{
             display: { sm: 'none' },
-            color: 'primary.brand',
+            color: 'primary.white',
             border: '1px solid rgba(255,255,255,0.4)',
             borderRadius: '10px',
             '&.MuiButton-root': {

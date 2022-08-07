@@ -14,7 +14,7 @@ function App() {
     palette: {
       mode: darkMode ? 'dark' : 'light',
       primary: {
-        main: '#0a1929',
+        main: '#1178f2',
         mainTrans: 'rgba(10, 25, 41, 0.8)',
         white: '#FFFFFF',
         brand: '#1178f2',
