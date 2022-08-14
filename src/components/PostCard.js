@@ -63,7 +63,7 @@ function PostCard({ createdBy, PostHeading, Content, picturePath }) {
       />
       <CardContent>
         <Typography variant="body2" sx={{ textAlign: 'justify' }}>
-          {`${Content.substring(0, 309)}...`}
+          {`${Content.substring(0, 200)}...`}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>

@@ -1,7 +1,13 @@
-import React from 'react';
-import { Box, Toolbar, Paper, Container } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Toolbar, Paper } from '@mui/material';
 import { drawerWidth } from './MyDrawer';
+import { useGlobalContext } from '../context';
 function Hero({ children }) {
+  const [windowHeight, setWindowHeight] = useState(500);
+  const { appBarHeight } = useGlobalContext();
+  useEffect(() => {
+    setWindowHeight(window.innerHeight);
+  }, []);
   return (
     <>
       <Toolbar />
@@ -9,11 +15,14 @@ function Hero({ children }) {
         component="main"
         sx={{
           display: 'flex',
+          minHeight: `calc(${windowHeight - appBarHeight}px)`,
+          // minHeight: '100vh',
           flexDirection: 'row',
           gap: 2,
           p: 2,
           flexWrap: 'wrap',
           justifyContent: { sm: 'center' },
+          alignItems: 'start',
           ml: { sm: `${drawerWidth}px` },
           boxShadow: 0,
         }}

@@ -1,14 +1,20 @@
-import React from 'react';
-import { AppBar, Toolbar, IconButton, Typography, Button } from '@mui/material';
+import { useEffect, useState, useRef } from 'react';
+import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useGlobalContext } from '../context';
 import { drawerWidth } from './MyDrawer';
 function MyAppBar() {
-  const { handleDrawerToggle, darkMode } = useGlobalContext();
+  const { handleDrawerToggle, darkMode, setAppBarHeight } = useGlobalContext();
+
   const myColor = !darkMode && 'white';
+  const appBar = useRef();
+  useEffect(() => {
+    setAppBarHeight(appBar.current.offsetHeight);
+  }, []);
   return (
     <AppBar
       position="fixed"
+      ref={appBar}
       elevation={2}
       sx={{
         width: { sm: `calc(100% - ${drawerWidth}px)` },

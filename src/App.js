@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Posts from './components/Posts';
 import { useGlobalContext } from './context';
 import Login from './Routes/Login';
+import CreatePost from './Routes/CreatePost';
 function App() {
   const { darkMode } = useGlobalContext();
   const homeTheme = createTheme({
@@ -32,6 +33,7 @@ function App() {
             <Route path="/" element={<Home />}>
               <Route path=":main/:sub" element={<Posts />} />
               <Route path="profile" element={<Profile />} />
+              <Route path="post" element={<CreatePost />} />
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
