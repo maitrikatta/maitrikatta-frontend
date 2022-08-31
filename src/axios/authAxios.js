@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const authAxios = axios.create({ baseURL: 'http://localhost:5000/api/v1' });
+const authAxios = axios.create({
+  baseURL: 'https://maitrikatta.herokuapp.com/api/v1',
+});
 
 authAxios.interceptors.request.use(
   (request) => {
