@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import register from '../style/register.module.css';
 import {
   Box,
   TextField,
@@ -8,18 +7,21 @@ import {
   Button,
   Icon,
   Typography,
+  Paper,
 } from '@mui/material';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import AlternateEmailOutlinedIcon from '@mui/icons-material/AlternateEmailOutlined';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import noAuthAxios from '../axios/noAuthAxios';
 import ErrorIcon from '@mui/icons-material/Error';
+import { useEffect } from 'react';
 function Login() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     email: '',
     password: '',
   });
+  const [windowHeight, setWindowHeight] = useState(800);
   const [axiosError, setAxiosError] = useState();
   const [error, setError] = useState({
     emailErr: null,
@@ -28,6 +30,9 @@ function Login() {
   const [hide, setHide] = useState(true);
   const passRef = useRef('');
   const emailRef = useRef('');
+  useEffect(() => {
+    setWindowHeight(window.innerHeight);
+  }, []);
   //send credentials
 
   const sendLoginForm = async ({ email, password }) => {
@@ -92,9 +97,40 @@ function Login() {
   };
 
   return (
-    <section className={register.wrapper}>
-      <form action="#" onSubmit={(e) => validate(e)} className={register.left}>
-        <div className={register.snippet_wrapper}>
+    <Paper
+      component="main"
+      elevation={16}
+      square
+      sx={{
+        display: 'flex',
+        // paddingTop: '5%',
+        width: '100%',
+        height: windowHeight,
+        boxSizing: 'border-box',
+      }}
+    >
+      <Paper
+        elevation={4}
+        sx={{
+          width: { xs: '90%', sm: '400px' },
+          margin: '10% auto',
+          height: '450px',
+          display: 'flex',
+          justifyContent: 'center',
+          boxShadow: '0px 0px 3px black',
+        }}
+      >
+        <Box
+          component="form"
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '25px',
+            paddingTop: '20px',
+          }}
+          action="#"
+          onSubmit={(e) => validate(e)}
+        >
           <Box
             sx={{
               display: 'flex',
@@ -114,7 +150,7 @@ function Login() {
             </Icon>
             <Typography sx={{ color: 'white' }}>{axiosError}</Typography>
           </Box>
-          <div className={register.snippet}>
+          <div>
             <Typography
               sx={{
                 fontFamily: 'apollo',
@@ -128,7 +164,7 @@ function Login() {
             </Typography>
           </div>
 
-          <div className={register.snippet}>
+          <div>
             <TextField
               onChange={(e) => {
                 setForm({ ...form, email: e.target.value.trim() });
@@ -137,7 +173,7 @@ function Login() {
               variant="outlined"
               label="email"
               placeholder="enter your email"
-              size="small"
+              size="medium"
               helperText={error.emailErr}
               type="email"
               inputRef={emailRef}
@@ -152,7 +188,7 @@ function Login() {
               }}
             />
           </div>
-          <div className={register.snippet}>
+          <div>
             <TextField
               onChange={(e) => {
                 setForm({ ...form, password: e.target.value });
@@ -162,7 +198,7 @@ function Login() {
               label="password"
               color={error.passwordErr ? 'error' : 'primary'}
               placeholder="create new password"
-              size="small"
+              size="medium"
               type={hide ? 'password' : 'text'}
               helperText={error.passwordErr}
               inputRef={passRef}
@@ -179,9 +215,9 @@ function Login() {
               }}
             />
           </div>
-          <div className={register.snippet}>
+          <div>
             <Button
-              size="small"
+              size="medium"
               color="primary"
               type="submit"
               variant="contained"
@@ -189,14 +225,20 @@ function Login() {
               Login
             </Button>
           </div>
-          <div className={register.snippet}>
-            <p className={register.sign}>
-              Don't have an account <a href="register">Register</a>
+          <div>
+            <p>
+              Don't have an account{'  '}
+              <a
+                style={{ color: 'blue', textDecoration: 'none' }}
+                href="register"
+              >
+                Register
+              </a>
             </p>
           </div>
-        </div>
-      </form>
-    </section>
+        </Box>
+      </Paper>
+    </Paper>
   );
 }
 
