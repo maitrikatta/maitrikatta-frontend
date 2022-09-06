@@ -1,11 +1,12 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useGlobalContext } from '../context';
 import { drawerWidth } from './MyDrawer';
+import { useNavigate } from 'react-router-dom';
 function MyAppBar() {
   const { handleDrawerToggle, darkMode, setAppBarHeight } = useGlobalContext();
-
+  const navigate = useNavigate();
   const myColor = !darkMode && 'white';
   const appBar = useRef();
   useEffect(() => {
@@ -53,8 +54,10 @@ function MyAppBar() {
             fontFamily: 'space',
             letterSpacing: { sm: '5px', xs: '2px' },
             color: { sm: !darkMode && 'black' },
+            cursor: 'pointer',
           }}
           variant="h6"
+          onClick={() => navigate('/')}
         >
           Maitrikatta
         </Typography>
