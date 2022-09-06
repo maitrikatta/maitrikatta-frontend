@@ -11,7 +11,6 @@ function Home() {
       <MyAppBar />
       <MyDrawer />
       <Hero>
-        {/* Outlet renders Posts component */}
         <Outlet />
       </Hero>
     </Box>

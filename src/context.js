@@ -7,9 +7,17 @@ export function AppProvider({ children }) {
     setMobileOpen(!mobileOpen);
   };
   const [darkMode, setDarkMode] = useState(false);
+  const [appBarHeight, setAppBarHeight] = useState();
   return (
     <AppContext.Provider
-      value={{ mobileOpen, handleDrawerToggle, darkMode, setDarkMode }}
+      value={{
+        appBarHeight,
+        setAppBarHeight,
+        mobileOpen,
+        handleDrawerToggle,
+        darkMode,
+        setDarkMode,
+      }}
     >
       {children}
     </AppContext.Provider>

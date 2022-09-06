@@ -1,14 +1,21 @@
-import React from 'react';
-import { AppBar, Toolbar, IconButton, Typography, Button } from '@mui/material';
+import { useEffect, useRef } from 'react';
+import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useGlobalContext } from '../context';
 import { drawerWidth } from './MyDrawer';
+import { useNavigate } from 'react-router-dom';
 function MyAppBar() {
-  const { handleDrawerToggle, darkMode } = useGlobalContext();
+  const { handleDrawerToggle, darkMode, setAppBarHeight } = useGlobalContext();
+  const navigate = useNavigate();
   const myColor = !darkMode && 'white';
+  const appBar = useRef();
+  useEffect(() => {
+    setAppBarHeight(appBar.current.offsetHeight);
+  }, []);
   return (
     <AppBar
       position="fixed"
+      ref={appBar}
       elevation={2}
       sx={{
         width: { sm: `calc(100% - ${drawerWidth}px)` },
@@ -26,7 +33,7 @@ function MyAppBar() {
           variant="outlined"
           sx={{
             display: { sm: 'none' },
-            color: 'primary.brand',
+            color: 'primary.white',
             border: '1px solid rgba(255,255,255,0.4)',
             borderRadius: '10px',
             '&.MuiButton-root': {
@@ -47,8 +54,10 @@ function MyAppBar() {
             fontFamily: 'space',
             letterSpacing: { sm: '5px', xs: '2px' },
             color: { sm: !darkMode && 'black' },
+            cursor: 'pointer',
           }}
           variant="h6"
+          onClick={() => navigate('/')}
         >
           Maitrikatta
         </Typography>
