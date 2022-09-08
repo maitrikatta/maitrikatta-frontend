@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 const AppContext = React.createContext();
 export function AppProvider({ children }) {
@@ -6,8 +6,24 @@ export function AppProvider({ children }) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState();
   const [appBarHeight, setAppBarHeight] = useState();
+
+  //select localStorage choice
+  useEffect(() => {
+    const storedThemeChoice = localStorage.getItem('darkMode');
+    if (storedThemeChoice === 'true') {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false);
+    }
+  }, []);
+
+  //change localStorage choice
+  useEffect(() => {
+    localStorage.setItem('darkMode', darkMode);
+  }, [darkMode]);
+
   return (
     <AppContext.Provider
       value={{
