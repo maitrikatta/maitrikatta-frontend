@@ -2,14 +2,21 @@ import React, { useContext, useEffect, useState } from 'react';
 
 const AppContext = React.createContext();
 export function AppProvider({ children }) {
+  // STATE FOR SIDEBAR OPEN
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // SIDEBAR STATE HANDLER
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  //DARK THEME CHECKBOX
   const [darkMode, setDarkMode] = useState();
+
+  //STORE APPBAR HEIGHT TO COMPUTE REST OF VIEWPORT
   const [appBarHeight, setAppBarHeight] = useState();
 
-  //select localStorage choice
+  //SELECT LOCALSTORAGE CHOICE OF THEME
   useEffect(() => {
     const storedThemeChoice = localStorage.getItem('darkMode');
     if (storedThemeChoice === 'true') {
@@ -19,7 +26,7 @@ export function AppProvider({ children }) {
     }
   }, []);
 
-  //change localStorage choice
+  //CHANGE LOCALSTORAGE CHOICE ACCORDING TO USER
   useEffect(() => {
     localStorage.setItem('darkMode', darkMode);
   }, [darkMode]);
@@ -28,10 +35,10 @@ export function AppProvider({ children }) {
     <AppContext.Provider
       value={{
         appBarHeight,
-        setAppBarHeight,
         mobileOpen,
-        handleDrawerToggle,
         darkMode,
+        setAppBarHeight,
+        handleDrawerToggle,
         setDarkMode,
       }}
     >
