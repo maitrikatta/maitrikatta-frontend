@@ -62,12 +62,13 @@ function Profile() {
         setDisable(false);
       }
     } catch (error) {
-      if (error.response.status === 401) navigate('/login', { replace: true });
+      if (error?.response?.status === 401)
+        navigate('/login', { replace: true });
     }
   }
   useEffect(() => {
     fetchData();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <Paper
       elevation={6}

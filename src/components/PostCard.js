@@ -4,6 +4,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import { red } from '@mui/material/colors';
 import customAxios from '../axios/authAxios';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Avatar,
   Button,
@@ -15,7 +16,13 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
-function PostCard({ createdBy, PostHeading, Content, picturePath }) {
+function PostCard({
+  createdBy,
+  PostHeading,
+  _id: postId,
+  Content,
+  picturePath,
+}) {
   const [profilePath, setProfilePath] = useState('');
   const [userName, setUserName] = useState('');
   const ellipse = PostHeading.length > 30 ? '...' : '';
@@ -31,7 +38,7 @@ function PostCard({ createdBy, PostHeading, Content, picturePath }) {
   }
   useEffect(() => {
     fetchUser();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <Card
       elevation={24}
@@ -73,9 +80,17 @@ function PostCard({ createdBy, PostHeading, Content, picturePath }) {
         <IconButton>
           <ShareIcon fontSize="medium" />
         </IconButton>
-        <Button variant="link" sx={{ marginLeft: 'auto' }}>
-          See More
-        </Button>
+
+        <Link
+          to={`/expand/${postId}`}
+          style={{
+            marginLeft: 'auto',
+            textDecoration: 'none',
+            color: 'silver',
+          }}
+        >
+          <Button variant="link">See More</Button>
+        </Link>
       </CardActions>
     </Card>
   );

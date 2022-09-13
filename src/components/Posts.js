@@ -13,14 +13,16 @@ function Posts() {
       const { data } = await customAxios.get(url);
       setPosts(data);
     } catch (error) {
-      if (error.response.status === 401) {
+      if (error?.response?.status === 401) {
         navigate('/login', { replace: true });
+      } else {
+        console.log(error);
       }
     }
   };
   useEffect(() => {
     fetchData();
-  }, [url]);
+  }, [url]); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <>
       {posts.map((post) => {
