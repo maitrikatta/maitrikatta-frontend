@@ -22,7 +22,7 @@ function Posts() {
   };
   useEffect(() => {
     fetchData();
-  }, [url]);
+  }, [url]); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <>
       {posts.map((post) => {

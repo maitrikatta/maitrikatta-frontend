@@ -1,5 +1,6 @@
 import './fonts/space age.ttf';
 // import Home from './Routes/test';
+import ExpandPost from './Routes/ExpandPost';
 import Home from './Routes/Home';
 import Profile from './Routes/Profile';
 import Register from './Routes/Register';
@@ -36,6 +37,9 @@ function App() {
               <Route path=":main/:sub" element={<Posts />} />
               <Route path="profile" element={<Profile />} />
               <Route path="post" element={<CreatePost />} />
+              <Route path="expand">
+                <Route path=":postId" element={<ExpandPost />}></Route>
+              </Route>
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />

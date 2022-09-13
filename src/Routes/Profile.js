@@ -68,7 +68,7 @@ function Profile() {
   }
   useEffect(() => {
     fetchData();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <Paper
       elevation={6}
