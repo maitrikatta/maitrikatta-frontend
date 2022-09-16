@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import noAuthAxios from '../axios/noAuthAxios';
-import PostCard from './PostCard';
+import PostCard from '../components/PostCard';
 function LandingPage() {
   const [posts, setPosts] = useState([]);
 
