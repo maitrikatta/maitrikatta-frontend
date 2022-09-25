@@ -1,9 +1,10 @@
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import ShareIcon from '@mui/icons-material/Share';
+import DeleteOutlined from '@mui/icons-material/DeleteOutlined';
 import { red } from '@mui/material/colors';
 import customAxios from '../axios/authAxios';
 import { useEffect, useState } from 'react';
+import ShareIcon from '@mui/icons-material/Share';
 import { Link } from 'react-router-dom';
 import {
   Avatar,
@@ -16,14 +17,15 @@ import {
   CardMedia,
   IconButton,
   Typography,
+  Tooltip,
 } from '@mui/material';
-import { getAutoHeightDuration } from '@mui/material/styles/createTransitions';
 function PostCard({
   createdBy,
   PostHeading,
   _id: postId,
   Content,
   picturePath,
+  deleteOption,
 }) {
   const [profilePath, setProfilePath] = useState('');
   const [userName, setUserName] = useState('');
@@ -36,6 +38,16 @@ function PostCard({
     if (response.data) {
       const { profilePath } = response.data;
       setProfilePath(profilePath);
+    }
+  }
+
+  async function handleDeletePost(ev) {
+    console.log('it ran');
+    try {
+      const res = await customAxios.delete(`/posts/${postId}`);
+      console.log(res);
+    } catch (error) {
+      console.error(error);
     }
   }
   useEffect(() => {
@@ -51,15 +63,17 @@ function PostCard({
       }}
     >
       <Box
-        sx={{
-          color: 'white',
-          backgroundColor: '#062C30',
-        }}
+        sx={
+          {
+            // color: 'white',
+            // backgroundColor: '#062C30',
+          }
+        }
       >
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} src={profilePath}>
-              Y
+              {userName[0]?.toUpperCase()}
             </Avatar>
           }
           action={
@@ -78,12 +92,12 @@ function PostCard({
             },
             '& .MuiCardHeader-subheader': {
               fontFamily: 'monospace',
-              color: 'white',
             },
             '& .MuiAvatar-circular': {
               border: '2px solid #FB3640',
               width: '50px',
               height: '50px',
+              // backgroundColor: 'aqua',
             },
           }}
         ></CardHeader>
@@ -111,7 +125,7 @@ function PostCard({
         >
           {`${Content.substring(0, 150).trim()}...`}
           {` `}
-          <Link
+          {/* <Link
             to={`/expand/${postId}`}
             style={{
               margin: 'auto',
@@ -120,17 +134,27 @@ function PostCard({
             }}
           >
             Read More
-          </Link>
+          </Link> */}
         </Typography>
       </CardContent>
-      {/* <CardActions disableSpacing>
-        <IconButton>
-          <BookmarkBorderIcon />
-        </IconButton>
-        <IconButton>
-          <ShareIcon fontSize="medium" />
-        </IconButton>
-
+      <CardActions disableSpacing>
+        <Tooltip title="bookmark">
+          <IconButton>
+            <BookmarkBorderIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="share">
+          <IconButton>
+            <ShareIcon fontSize="medium" />
+          </IconButton>
+        </Tooltip>
+        {deleteOption && (
+          <Tooltip title="delete">
+            <IconButton onClick={(ev) => handleDeletePost()}>
+              <DeleteOutlined />
+            </IconButton>
+          </Tooltip>
+        )}
         <Link
           to={`/expand/${postId}`}
           style={{
@@ -141,7 +165,7 @@ function PostCard({
         >
           <Button variant="link">Read More</Button>
         </Link>
-      </CardActions> */}
+      </CardActions>
     </Card>
   );
 }

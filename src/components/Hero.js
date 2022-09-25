@@ -26,8 +26,9 @@ function Hero({ children }) {
           gap: 2,
           p: 2,
           flexWrap: 'wrap',
-          justifyContent: { sm: 'center' },
+          justifyContent: { xs: 'center' },
           alignItems: 'start',
+          alignContent: 'start',
           ml: { sm: `${drawerWidth}px` },
           boxShadow: 0,
         }}

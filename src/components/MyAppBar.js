@@ -6,6 +6,7 @@ import {
   Toolbar,
   Typography,
   Button,
+  Tooltip,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -86,20 +87,11 @@ function MyAppBar() {
             gap: 1,
           }}
         >
-          <Typography
-            sx={{
-              fontFamily: 'apollo',
-              letterSpacing: '2px',
-              color: 'primary.brand',
-              alignSelf: 'center',
-              display: { xs: 'none', md: 'inherit' },
-            }}
-          >
-            logout
-          </Typography>
-          <IconButton onClick={() => logoutUser()}>
-            <LogoutIcon />
-          </IconButton>
+          <Tooltip title="logout">
+            <IconButton onClick={() => logoutUser()}>
+              <LogoutIcon />
+            </IconButton>
+          </Tooltip>
         </Box>
       </Toolbar>
     </AppBar>
