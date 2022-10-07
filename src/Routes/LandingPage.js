@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import noAuthAxios from '../axios/noAuthAxios';
 import PostCard from '../components/PostCard';
-function LandingPage() {
-  const [posts, setPosts] = useState([]);
+import { useGlobalContext } from '../context';
 
+function LandingPage() {
+  const { posts, setPosts } = useGlobalContext();
   async function fetchData() {
     try {
       const result = await noAuthAxios.get('/landing');
