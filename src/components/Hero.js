@@ -1,34 +1,17 @@
 import { useEffect, useState, useRef } from 'react';
-import { Toolbar, Paper } from '@mui/material';
+import { Toolbar, Paper, CircularProgress } from '@mui/material';
 import { drawerWidth } from './MyDrawer';
 import { useGlobalContext } from '../context';
-import observeLastDiv from '../lib/infinte-scroll';
 import useFetchData from '../lib/fetch-more-posts';
-
 function Hero({ children }) {
   const [windowHeight, setWindowHeight] = useState(500);
-  const { appBarHeight, posts, setPageNo, pageNo } = useGlobalContext();
+  const { appBarHeight } = useGlobalContext();
   const myRef = useRef();
+  useFetchData('/landing', myRef);
   useEffect(() => {
     setWindowHeight(window.innerHeight);
   }, []);
-  useEffect(() => {
-    if (posts.length > 0) {
-      observeLastDiv(myRef.current.lastChild).then((res) => {
-        if (res === 'LOAD MORE') {
-          // posts length not multiple of 10 must indicate end.
-          if (!(posts.length % 10)) setPageNo(posts.length / 10 + 1);
-        }
-      });
-    }
-    // restart the common state, when user navigates
-    return () => {
-      setPageNo(1);
-    };
-  }, [posts]);
-  useEffect(() => {
-    console.log('Page:', pageNo);
-  }, [pageNo]);
+
   return (
     <>
       <Toolbar />
@@ -49,6 +32,7 @@ function Hero({ children }) {
           alignContent: 'start',
           ml: { sm: `${drawerWidth}px` },
           boxShadow: 0,
+          position: 'relative',
         }}
         square
         elevation={18}

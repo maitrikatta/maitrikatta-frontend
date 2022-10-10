@@ -1,14 +1,20 @@
 import { useGlobalContext } from '../context';
-import customAxios from '../axios/authAxios';
+import noAuthAxios from '../axios/noAuthAxios';
 import { useNavigate } from 'react-router-dom';
-const useFetchData = async (url) => {
+import useObserveLastDiv from './observeLastDiv';
+const useFetchData = (url, lastChild) => {
   const { setPosts, posts } = useGlobalContext();
   const navigate = useNavigate();
-  if (posts.length > 10) {
+
+  const makeRequest = async (pageNo) => {
     try {
-      const { data } = await customAxios.get(url);
-      setPosts(data);
-      console.log(data.length);
+      const { data } = await noAuthAxios.get(`${url}?page=${pageNo}`);
+      console.log(data);
+      setPosts((prevPosts) => {
+        const newPosts = [...prevPosts, ...data];
+        return newPosts;
+      });
+      console.log(posts);
     } catch (error) {
       if (error?.response?.status === 401) {
         navigate('/login', { replace: true });
@@ -16,7 +22,8 @@ const useFetchData = async (url) => {
         console.log(error);
       }
     }
-  }
+  };
+  useObserveLastDiv(lastChild, makeRequest);
 };
 
 export default useFetchData;
