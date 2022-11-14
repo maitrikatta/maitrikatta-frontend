@@ -9,12 +9,12 @@ const useFetchData = (url, lastChild) => {
   const makeRequest = async (pageNo) => {
     try {
       const { data } = await noAuthAxios.get(`${url}?page=${pageNo}`);
-      console.log(data);
+      // console.log(data);
       setPosts((prevPosts) => {
         const newPosts = [...prevPosts, ...data];
         return newPosts;
       });
-      console.log(posts);
+      // console.log(posts);
     } catch (error) {
       if (error?.response?.status === 401) {
         navigate('/login', { replace: true });
@@ -23,6 +23,7 @@ const useFetchData = (url, lastChild) => {
       }
     }
   };
+  // look for last divJ
   useObserveLastDiv(lastChild, makeRequest);
 };
 

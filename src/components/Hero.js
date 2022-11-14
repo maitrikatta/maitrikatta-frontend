@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { Toolbar, Paper, CircularProgress } from '@mui/material';
+import { Toolbar, Paper } from '@mui/material';
 import { drawerWidth } from './MyDrawer';
 import { useGlobalContext } from '../context';
 import useFetchData from '../lib/fetch-more-posts';
@@ -32,6 +32,7 @@ function Hero({ children }) {
           alignContent: 'start',
           ml: { sm: `${drawerWidth}px` },
           boxShadow: 0,
+          boxSizing: 'border-box',
           position: 'relative',
         }}
         square
