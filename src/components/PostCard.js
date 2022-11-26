@@ -3,7 +3,8 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import DeleteOutlined from '@mui/icons-material/DeleteOutlined';
 import { red } from '@mui/material/colors';
 import customAxios from '../axios/authAxios';
-import { useEffect, useState } from 'react';
+import noAuthAxios from '../axios/noAuthAxios';
+import { useEffect, useState, useRef } from 'react';
 import ShareIcon from '@mui/icons-material/Share';
 import { Link } from 'react-router-dom';
 import {
@@ -30,6 +31,7 @@ function PostCard({
   const [profilePath, setProfilePath] = useState('');
   const [userName, setUserName] = useState('');
   const ellipse = PostHeading.length > 30 ? '...' : '';
+  const imgRef = useRef(null);
   async function fetchUser() {
     const response = await customAxios(`/profile/${createdBy}`);
     const { data } = await customAxios(`/profile/login/${createdBy}`);
@@ -50,9 +52,22 @@ function PostCard({
       console.error(error);
     }
   }
+  async function getImage() {
+    const { data: blob } = await noAuthAxios.get(
+      `/images/public/posts/${picturePath}`,
+      {
+        responseType: 'blob',
+      }
+    );
+    if (blob) {
+      imgRef.current.src = URL.createObjectURL(blob);
+    }
+  }
   useEffect(() => {
+    getImage();
     fetchUser();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <Card
       elevation={24}
@@ -104,8 +119,8 @@ function PostCard({
       </Box>
       <CardMedia
         component="img"
+        ref={imgRef}
         height="194"
-        image={picturePath}
         alt="Image Not Found"
       />
       <CardContent>
