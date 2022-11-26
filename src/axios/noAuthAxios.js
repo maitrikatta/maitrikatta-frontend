@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const noAuthAxios = axios.create({ baseURL: 'http://localhost:5000/api/v1' });
+const noAuthAxios = axios.create({
+  baseURL: 'https://maitrikatta.herokuapp.com/api/v1',
+});
 noAuthAxios.interceptors.response.use(
   (response) => {
     if (response) return response;
