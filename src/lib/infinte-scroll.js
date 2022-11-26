@@ -1,18 +1,19 @@
 function observeLastDiv(lastDiv) {
-  const options = {
-    rootMargin: '100px',
-    threshold: 0,
-  };
-  const observer = new IntersectionObserver(callback, options);
-  console.log(lastDiv);
-  observer.observe(lastDiv);
-  function callback(entries, ob) {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        console.log('load more');
-        observer.unobserve(entry.target);
-      }
-    });
-  }
+  return new Promise((resolve, reject) => {
+    const options = {
+      rootMargin: '00px',
+      threshold: 0,
+    };
+    const observer = new IntersectionObserver(callback, options);
+    observer.observe(lastDiv);
+    function callback(entries, ob) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          observer.unobserve(entry.target);
+          resolve('LOAD MORE');
+        }
+      });
+    }
+  });
 }
 export default observeLastDiv;

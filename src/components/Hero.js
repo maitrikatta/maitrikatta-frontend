@@ -2,11 +2,12 @@ import { useEffect, useState, useRef } from 'react';
 import { Toolbar, Paper } from '@mui/material';
 import { drawerWidth } from './MyDrawer';
 import { useGlobalContext } from '../context';
-
+import useFetchData from '../lib/fetch-more-posts';
 function Hero({ children }) {
   const [windowHeight, setWindowHeight] = useState(500);
   const { appBarHeight } = useGlobalContext();
   const myRef = useRef();
+  useFetchData('/landing', myRef);
   useEffect(() => {
     setWindowHeight(window.innerHeight);
   }, []);
@@ -26,10 +27,13 @@ function Hero({ children }) {
           gap: 2,
           p: 2,
           flexWrap: 'wrap',
-          justifyContent: { sm: 'center' },
+          justifyContent: { xs: 'center' },
           alignItems: 'start',
+          alignContent: 'start',
           ml: { sm: `${drawerWidth}px` },
           boxShadow: 0,
+          boxSizing: 'border-box',
+          position: 'relative',
         }}
         square
         elevation={18}

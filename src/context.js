@@ -2,6 +2,11 @@ import React, { useContext, useEffect, useState } from 'react';
 
 const AppContext = React.createContext();
 export function AppProvider({ children }) {
+  // MAINTAIN POSTS LIST
+  const [posts, setPosts] = useState([]);
+  const [pageNo, setPageNo] = useState(1);
+  const [isLoadingPosts, setIsLoadingPosts] = useState(true);
+
   // STATE FOR SIDEBAR OPEN
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -37,6 +42,12 @@ export function AppProvider({ children }) {
         appBarHeight,
         mobileOpen,
         darkMode,
+        posts,
+        pageNo,
+        isLoadingPosts,
+        setPageNo,
+        setIsLoadingPosts,
+        setPosts,
         setAppBarHeight,
         handleDrawerToggle,
         setDarkMode,
