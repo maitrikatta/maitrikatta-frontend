@@ -9,12 +9,13 @@ import {
   Button,
   Icon,
   Typography,
+  Paper,
+  Box,
 } from '@mui/material';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import AlternateEmailOutlinedIcon from '@mui/icons-material/AlternateEmailOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { Box } from '@mui/system';
 function Register() {
   const [axiosError, setAxiosError] = useState(false);
   const navigate = useNavigate();
@@ -110,9 +111,33 @@ function Register() {
   };
 
   return (
-    <section className={register.wrapper}>
-      <form action="#" onSubmit={(e) => validate(e)} className={register.left}>
-        <div className={register.snippet_wrapper}>
+    <Box component="section" className={register.wrapper}>
+      <Box
+        component="form"
+        sx={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        action="#"
+        onSubmit={(e) => validate(e)}
+      >
+        <Paper
+          elevation={16}
+          square
+          sx={{
+            width: { xs: '85%', sm: '450px', md: '500px' },
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            gap: '20px',
+            textAlign: 'center',
+            p: 3,
+          }}
+        >
           <Box
             sx={{
               display: 'flex',
@@ -218,10 +243,9 @@ function Register() {
               Have an account <a href="login">Log-In</a>
             </p>
           </div>
-        </div>
-      </form>
-      <section className={register.right}></section>
-    </section>
+        </Paper>
+      </Box>
+    </Box>
   );
 }
 
