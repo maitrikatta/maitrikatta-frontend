@@ -3,8 +3,9 @@ import { useParams } from 'react-router-dom';
 import PostCard from './PostCard';
 import customAxios from '../axios/authAxios';
 import { useNavigate } from 'react-router-dom';
+import { useGlobalContext } from '../context';
 function Posts() {
-  const [posts, setPosts] = useState([]);
+  const { posts, setPosts } = useGlobalContext();
   const { main, sub } = useParams();
   let navigate = useNavigate();
   let url = '/posts/?type=' + sub;
@@ -22,7 +23,7 @@ function Posts() {
   };
   useEffect(() => {
     fetchData();
-  }, [url]);
+  }, [url]); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <>
       {posts.map((post) => {

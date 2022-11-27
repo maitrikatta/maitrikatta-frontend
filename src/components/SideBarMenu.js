@@ -12,7 +12,7 @@ import {
   FormControlLabel,
   Typography,
 } from '@mui/material';
-import Switch, { SwitchProps } from '@mui/material/Switch';
+import Switch from '@mui/material/Switch';
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 import list from '../Lists/sidebarList';
@@ -21,7 +21,6 @@ import { NavLink } from 'react-router-dom';
 function SideBarMenu() {
   const { setDarkMode, darkMode } = useGlobalContext();
   const [activeListItem, setActiveListItem] = React.useState(null);
-
   const handleActiveList = (i) => {
     activeListItem === i ? setActiveListItem(null) : setActiveListItem(i);
   };
@@ -36,7 +35,11 @@ function SideBarMenu() {
         <FormGroup>
           <FormControlLabel
             control={
-              <Switch color="default" onChange={() => setDarkMode(!darkMode)} />
+              <Switch
+                checked={darkMode ? true : false}
+                color="default"
+                onChange={() => setDarkMode(!darkMode)}
+              />
             }
             label="DARK THEME"
             sx={{

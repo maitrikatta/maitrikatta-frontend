@@ -16,7 +16,7 @@ authAxios.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response.status === 401) {
+    if (error?.response?.status === 401) {
       console.log('401 ERROR');
       return Promise.reject(error);
     }

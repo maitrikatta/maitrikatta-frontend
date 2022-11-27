@@ -5,6 +5,8 @@ import MyAppBar from '../components/MyAppBar';
 import Hero from '../components/Hero';
 import { Outlet } from 'react-router-dom';
 
+/* this file contains or meets all major UI component 
+of app. */
 function Home() {
   return (
     <Box component="section">

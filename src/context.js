@@ -1,21 +1,55 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 const AppContext = React.createContext();
 export function AppProvider({ children }) {
+  // MAINTAIN POSTS LIST
+  const [posts, setPosts] = useState([]);
+  const [pageNo, setPageNo] = useState(1);
+  const [isLoadingPosts, setIsLoadingPosts] = useState(true);
+
+  // STATE FOR SIDEBAR OPEN
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  // SIDEBAR STATE HANDLER
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  const [darkMode, setDarkMode] = useState(false);
+
+  //DARK THEME CHECKBOX
+  const [darkMode, setDarkMode] = useState();
+
+  //STORE APPBAR HEIGHT TO COMPUTE REST OF VIEWPORT
   const [appBarHeight, setAppBarHeight] = useState();
+
+  //SELECT LOCALSTORAGE CHOICE OF THEME
+  useEffect(() => {
+    const storedThemeChoice = localStorage.getItem('darkMode');
+    if (storedThemeChoice === 'true') {
+      setDarkMode(true);
+    } else {
+      setDarkMode(false);
+    }
+  }, []);
+
+  //CHANGE LOCALSTORAGE CHOICE ACCORDING TO USER
+  useEffect(() => {
+    localStorage.setItem('darkMode', darkMode);
+  }, [darkMode]);
+
   return (
     <AppContext.Provider
       value={{
         appBarHeight,
-        setAppBarHeight,
         mobileOpen,
-        handleDrawerToggle,
         darkMode,
+        posts,
+        pageNo,
+        isLoadingPosts,
+        setPageNo,
+        setIsLoadingPosts,
+        setPosts,
+        setAppBarHeight,
+        handleDrawerToggle,
         setDarkMode,
       }}
     >
