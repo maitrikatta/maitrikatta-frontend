@@ -16,6 +16,9 @@ noAuthAxios.interceptors.response.use(
       alert('Network Error');
       return Promise.reject(error);
     }
+    // if no error matches should return error
+    // otherwise try catch wont get error obj
+    return error;
   }
 );
 export default noAuthAxios;
