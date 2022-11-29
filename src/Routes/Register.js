@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import noAuthAxios from '../axios/noAuthAxios';
 import { useNavigate } from 'react-router-dom';
 import ErrorIcon from '@mui/icons-material/Error';
@@ -19,6 +19,9 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 function Register() {
   const [axiosError, setAxiosError] = useState(false);
   const navigate = useNavigate();
+
+  //removes bug: window scrolling on mobile
+  const [windowHeight, setWindowHeight] = useState(800);
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -109,9 +112,22 @@ function Register() {
 
     sendData();
   };
+  useEffect(() => {
+    setWindowHeight(window.innerHeight);
+  }, []);
 
   return (
-    <Box component="section" className={register.wrapper}>
+    <Box
+      component="section"
+      sx={{
+        width: '100%',
+        height: windowHeight,
+        background: 'rgb(5, 0, 36)',
+        background:
+          'linear-gradient(-120deg,rgb(3, 28, 65) 0%,rgba(89, 110, 133, 1) 50%,rgba(0, 30, 60, 1) 100%)',
+        backgroundSize: 'cover',
+      }}
+    >
       <Box
         component="form"
         sx={{
