@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const noAuthAxios = axios.create({ baseURL: 'http://localhost:5000/api/v1' });
+const noAuthAxios = axios.create({
+  baseURL: 'https://maitrikatta.herokuapp.com/api/v1',
+});
 noAuthAxios.interceptors.response.use(
   (response) => {
     if (response) return response;
@@ -14,6 +16,9 @@ noAuthAxios.interceptors.response.use(
       alert('Network Error');
       return Promise.reject(error);
     }
+    // if no error matches should return error
+    // otherwise try catch wont get error obj
+    return error;
   }
 );
 export default noAuthAxios;

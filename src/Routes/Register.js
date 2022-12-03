@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import noAuthAxios from '../axios/noAuthAxios';
 import { useNavigate } from 'react-router-dom';
 import ErrorIcon from '@mui/icons-material/Error';
@@ -9,15 +9,19 @@ import {
   Button,
   Icon,
   Typography,
+  Paper,
+  Box,
 } from '@mui/material';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import AlternateEmailOutlinedIcon from '@mui/icons-material/AlternateEmailOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { Box } from '@mui/system';
 function Register() {
   const [axiosError, setAxiosError] = useState(false);
   const navigate = useNavigate();
+
+  //removes bug: window scrolling on mobile
+  const [windowHeight, setWindowHeight] = useState(800);
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -108,11 +112,48 @@ function Register() {
 
     sendData();
   };
+  useEffect(() => {
+    setWindowHeight(window.innerHeight);
+  }, []);
 
   return (
-    <section className={register.wrapper}>
-      <form action="#" onSubmit={(e) => validate(e)} className={register.left}>
-        <div className={register.snippet_wrapper}>
+    <Box
+      component="section"
+      sx={{
+        width: '100%',
+        height: windowHeight,
+        background: 'rgb(5, 0, 36)',
+        background:
+          'linear-gradient(-120deg,rgb(3, 28, 65) 0%,rgba(89, 110, 133, 1) 50%,rgba(0, 30, 60, 1) 100%)',
+        backgroundSize: 'cover',
+      }}
+    >
+      <Box
+        component="form"
+        sx={{
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        action="#"
+        onSubmit={(e) => validate(e)}
+      >
+        <Paper
+          elevation={16}
+          square
+          sx={{
+            width: { xs: '85%', sm: '450px', md: '500px' },
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            gap: '20px',
+            textAlign: 'center',
+            p: 3,
+          }}
+        >
           <Box
             sx={{
               display: 'flex',
@@ -218,10 +259,9 @@ function Register() {
               Have an account <a href="login">Log-In</a>
             </p>
           </div>
-        </div>
-      </form>
-      <section className={register.right}></section>
-    </section>
+        </Paper>
+      </Box>
+    </Box>
   );
 }
 
