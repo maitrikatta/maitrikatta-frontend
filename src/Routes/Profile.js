@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import authAxios from '../axios/authAxios';
 import defaultProfile from '../assets/img/profile.jpg';
+import setImageBlob from '../lib/setImageBlob';
 import {
   Paper,
   Typography,
@@ -14,52 +15,81 @@ import {
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 
+const initialState = {
+  name: 'Your Name',
+  bio: 'Describe your self in few words',
+  imgKey: null,
+  college: 'Where you study or studied',
+  disable: true,
+  isFileSelected: false,
+};
+
 function Profile() {
   const navigate = useNavigate();
-  const [name, setName] = useState('Your Name');
-  const [bio, setBio] = useState('Describe your self in few words');
-  const [college, setCollege] = useState('Where you study or studied');
-  const [profilePath, setProfilePath] = useState(defaultProfile);
-  const [disable, setDisable] = useState(true);
-  const [isFileSelected, setIsFileSelected] = useState(false);
+  const imgRef = useRef(null);
+
+  const [profile, setProfile] = useState(initialState);
+
+  // when
   async function sendData(event) {
     event.preventDefault();
     const formData = new FormData();
-    console.log();
     formData.append('bioStatus', event.target['bio'].value);
     formData.append('profile', event.target['profile'].files[0]);
     formData.append('college', event.target['college'].value);
+
     const { data } = await authAxios.post('/profile', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
+    // this sets state after fetching data
     if (data) {
-      const { bioStatus, college, profilePath } = data;
-      setBio(bioStatus);
-      setCollege(college);
-      setProfilePath(profilePath);
-      setDisable(true);
+      const { bioStatus: bio, college, profilePath: imgKey } = data;
+
+      setProfile((prevState) => {
+        return {
+          ...prevState,
+          bio,
+          college,
+          imgKey,
+          disable: true,
+        };
+      });
     }
+  }
+  function getImage() {
+    const route = 'images/public/profile';
+    let imgKey = profile.imgKey;
+    setImageBlob({ route, targetRef: imgRef, imgKey });
   }
   async function fetchData() {
     try {
       const {
         data: { login_info, personal_info },
       } = await authAxios.get('/profile');
-      setName(login_info.name);
+
+      setProfile((prevState) => {
+        return { ...prevState, name: login_info.name };
+      });
 
       // if personal info is set
-
       if (personal_info) {
-        const { bioStatus, college, profilePath } = personal_info;
-        setBio(bioStatus);
-        setCollege(college);
-        setProfilePath(profilePath);
-        setDisable(true);
+        const { bioStatus: bio, college, profilePath: imgKey } = personal_info;
+        setProfile((prevState) => {
+          return {
+            ...prevState,
+            bio,
+            college,
+            imgKey,
+            disable: true,
+          };
+        });
       } else {
-        // set edit true
-        setDisable(false);
+        // let edit the form
+        setProfile((prevState) => {
+          return { ...prevState, disable: false };
+        });
       }
     } catch (error) {
       if (error?.response?.status === 401)
@@ -67,8 +97,12 @@ function Profile() {
     }
   }
   useEffect(() => {
+    // load profile details
     fetchData();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (profile.imgKey != null) getImage();
+  }, [profile.imgKey]);
   return (
     <Paper
       elevation={6}
@@ -110,18 +144,22 @@ function Profile() {
                 position: 'relative',
               }}
             >
-              <img src={profilePath} alt="" />
+              <img ref={imgRef} src={defaultProfile} alt="" />
               <IconButton
                 aria-label="upload picture"
                 component="label"
                 sx={{
-                  color: isFileSelected ? '#008140' : 'secondary',
+                  color: profile.isFileSelected ? '#008140' : 'secondary',
                   position: 'absolute',
                   bottom: -4,
                 }}
               >
                 <input
-                  onChange={() => setIsFileSelected(true)}
+                  onChange={() =>
+                    setProfile((prevState) => {
+                      return { ...prevState, setIsFileSelected: true };
+                    })
+                  }
                   name="profile"
                   required
                   hidden
@@ -148,7 +186,7 @@ function Profile() {
                 variant="h5"
                 sx={{ fontFamily: 'roboto-thin' }}
               >
-                {name}
+                {profile.name}
               </Typography>
               <Button
                 size="small"
@@ -191,7 +229,7 @@ function Profile() {
                   textAlign: { xs: 'center', sm: 'start' },
                 }}
               >
-                {bio}
+                {profile.bio}
               </Typography>
             </Box>
           </Box>
@@ -209,16 +247,18 @@ function Profile() {
         >
           <TextField
             disabled={true}
-            value={name}
+            value={profile.name}
             label="name"
             size="small"
           ></TextField>
           <TextField
-            disabled={disable}
+            disabled={profile.disable}
             onChange={(ev) => {
-              setCollege(ev.target.value);
+              setProfile((prevState) => {
+                return { ...prevState, college: ev.target.value };
+              });
             }}
-            value={college}
+            value={profile.college}
             required
             name="college"
             label="college"
@@ -227,15 +267,23 @@ function Profile() {
           <TextField
             label="Your Bio"
             required
-            disabled={disable}
-            onChange={(ev) => setBio(ev.target.value)}
+            disabled={profile.disable}
+            onChange={(ev) =>
+              setProfile((prevState) => {
+                return { ...prevState, bio: ev.target.value };
+              })
+            }
             name="bio"
-            value={bio}
+            value={profile.bio}
             // multiline
             maxRows={1}
           ></TextField>
           <Box>
-            <Button type="submit" disabled={disable} variant="contained">
+            <Button
+              type="submit"
+              disabled={profile.disable}
+              variant="contained"
+            >
               Submit
             </Button>
           </Box>

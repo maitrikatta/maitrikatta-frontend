@@ -3,7 +3,7 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import DeleteOutlined from '@mui/icons-material/DeleteOutlined';
 import { red } from '@mui/material/colors';
 import customAxios from '../axios/authAxios';
-import noAuthAxios from '../axios/noAuthAxios';
+import setImageBlob from '../lib/setImageBlob';
 import { useEffect, useState, useRef } from 'react';
 import ShareIcon from '@mui/icons-material/Share';
 import { Link } from 'react-router-dom';
@@ -52,20 +52,14 @@ function PostCard({
       console.error(error);
     }
   }
-  async function getImage() {
-    const { data: blob } = await noAuthAxios.get(
-      `/images/public/posts/${picturePath}`,
-      {
-        responseType: 'blob',
-      }
-    );
-    if (blob) {
-      imgRef.current.src = URL.createObjectURL(blob);
-    }
+  function getImage() {
+    const route = 'images/public/posts';
+    const imgKey = picturePath;
+    setImageBlob({ route, targetRef: imgRef, imgKey });
   }
   useEffect(() => {
-    getImage();
     fetchUser();
+    getImage();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -122,6 +116,10 @@ function PostCard({
         ref={imgRef}
         height="194"
         alt="Image Not Found"
+        sx={{
+          objectFit: 'cover',
+          objectPosition: '0 15%',
+        }}
       />
       <CardContent>
         <Typography
