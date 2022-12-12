@@ -1,25 +1,10 @@
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import DeleteOutlined from '@mui/icons-material/DeleteOutlined';
-import { red } from '@mui/material/colors';
+import CardAction from './PostCard/CardAction';
+import MiddleContent from './PostCard/MiddleContent';
+import TheHeader from './PostCard/TheHeader';
 import customAxios from '../axios/authAxios';
 import setImageBlob from '../lib/setImageBlob';
 import { useEffect, useState, useRef } from 'react';
-import ShareIcon from '@mui/icons-material/Share';
-import { Link } from 'react-router-dom';
-import {
-  Avatar,
-  Button,
-  Box,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  IconButton,
-  Typography,
-  Tooltip,
-} from '@mui/material';
+import { Box, Card, CardMedia } from '@mui/material';
 function PostCard({
   createdBy,
   PostHeading,
@@ -44,12 +29,11 @@ function PostCard({
   }
 
   async function handleDeletePost(ev) {
-    console.log('it ran');
     try {
       const res = await customAxios.delete(`/posts/${postId}`);
       console.log(res);
     } catch (error) {
-      console.error(error);
+      console.error('Cant delete post!');
     }
   }
   function getImage() {
@@ -78,107 +62,29 @@ function PostCard({
             // backgroundColor: '#062C30',
           }
         }
-      >
-        <CardHeader
-          avatar={
-            <Avatar sx={{ bgcolor: red[500] }} src={profilePath}>
-              {userName[0]?.toUpperCase()}
-            </Avatar>
-          }
-          action={
-            <IconButton>
-              <MoreVertIcon />
-            </IconButton>
-          }
-          title={`${PostHeading.substring(0, 50).trim()}${ellipse}`}
-          subheader={`${userName}`}
-          sx={{
-            '& .MuiCard-root': {
-              backgroundColor: '#002B5B',
-            },
-            '& .MuiCardHeader-title': {
-              fontFamily: 'Comic-ink',
-            },
-            '& .MuiCardHeader-subheader': {
-              fontFamily: 'monospace',
-            },
-            '& .MuiAvatar-circular': {
-              border: '2px solid #FB3640',
-              width: '50px',
-              height: '50px',
-              // backgroundColor: 'aqua',
-            },
-          }}
-        ></CardHeader>
-      </Box>
+      ></Box>
+      <TheHeader
+        profilePath={profilePath}
+        userName={userName}
+        ellipse={ellipse}
+        PostHeading={PostHeading}
+      />
       <CardMedia
         component="img"
         ref={imgRef}
         height="194"
-        alt="Image Not Found"
+        alt="Loading image..."
         sx={{
           objectFit: 'cover',
           objectPosition: '0 15%',
         }}
       />
-      <CardContent>
-        <Typography
-          variant="body2"
-          sx={{
-            fontSize: '1.1rem',
-            textAlign: 'start',
-            fontFamily: 'NewsPaper',
-            fontWeight: 'bold',
-            letterSpacing: '1px',
-            ':first-letter': {
-              color: '#FA7070',
-              fontSize: '1.5rem',
-            },
-          }}
-        >
-          {`${Content.substring(0, 150).trim()}...`}
-          {` `}
-          {/* <Link
-            to={`/expand/${postId}`}
-            style={{
-              margin: 'auto',
-              textDecoration: 'none',
-              color: 'gray',
-            }}
-          >
-            Read More
-          </Link> */}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <Tooltip title="bookmark">
-          <IconButton>
-            <BookmarkBorderIcon />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="share">
-          <IconButton>
-            <ShareIcon fontSize="medium" />
-          </IconButton>
-        </Tooltip>
-        {deleteOption && (
-          <Tooltip title="delete">
-            <IconButton onClick={(ev) => handleDeletePost()}>
-              <DeleteOutlined />
-            </IconButton>
-          </Tooltip>
-        )}
-        <Link
-          to={`/expand/${postId}`}
-          style={{
-            marginLeft: 'auto',
-            textDecoration: 'none',
-            color: 'gray',
-          }}
-        >
-          <Button variant="link">Read More</Button>
-        </Link>
-      </CardActions>
+      <MiddleContent Content={Content} />
+      <CardAction
+        deleteOption={deleteOption}
+        postId={postId}
+        handleDeletePost={handleDeletePost}
+      />
     </Card>
   );
 }

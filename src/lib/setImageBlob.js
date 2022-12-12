@@ -4,6 +4,7 @@ async function setImageBlob({ route, targetRef, imgKey }) {
     responseType: 'blob',
   });
   if (blob) {
+    // works for img target
     targetRef.current.src = URL.createObjectURL(blob);
   }
 }
