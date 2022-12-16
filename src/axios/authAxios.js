@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const authAxios = axios.create({
-  baseURL: 'https://maitrikatta.herokuapp.com/api/v1',
+  baseURL: 'https://maitrikatta.com/api/v1',
 });
 
 authAxios.interceptors.request.use(
