@@ -2,7 +2,6 @@ import React from 'react';
 import App from './App';
 import { createRoot } from 'react-dom/client';
 import { AppProvider } from './context';
-import './fonts/APOLLO.otf';
 import './style/fonts.css';
 const root = createRoot(document.getElementById('root'));
 root.render(

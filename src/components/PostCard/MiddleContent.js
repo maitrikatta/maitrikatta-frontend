@@ -8,27 +8,12 @@ function MiddleContent({ Content }) {
         sx={{
           fontSize: '1.1rem',
           textAlign: 'start',
-          fontFamily: 'NewsPaper',
+          fontFamily: 'Dosis',
           fontWeight: 'bold',
           letterSpacing: '1px',
-          ':first-letter': {
-            color: '#FA7070',
-            fontSize: '1.5rem',
-          },
         }}
       >
         {`${Content.substring(0, 150).trim()}...`}
-        {` `}
-        {/* <Link
-            to={`/expand/${postId}`}
-            style={{
-              margin: 'auto',
-              textDecoration: 'none',
-              color: 'gray',
-            }}
-          >
-            Read More
-          </Link> */}
       </Typography>
     </CardContent>
   );

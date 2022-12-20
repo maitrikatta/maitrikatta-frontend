@@ -44,7 +44,7 @@ function SideBarMenu() {
             label="DARK THEME"
             sx={{
               '.MuiTypography-root': {
-                fontFamily: 'apollo',
+                fontFamily: 'Dosis',
                 fontSize: 16,
                 letterSpacing: '2px',
                 pl: 1,
@@ -138,7 +138,7 @@ function SideBarMenu() {
                             <ListItemText>
                               <Typography
                                 sx={{
-                                  fontFamily: 'apollo',
+                                  fontFamily: 'Dosis',
                                   letterSpacing: '2px',
                                   fontSize: '1rem',
                                   color: darkMode ? 'white' : 'black',

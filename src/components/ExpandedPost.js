@@ -42,7 +42,7 @@ export default function Post({
           <Box sx={{ position: 'relative' }}>
             <Typography
               sx={{
-                fontFamily: 'Comic-ink',
+                fontFamily: 'Dosis',
                 letterSpacing: '2px',
                 fontSize: '18px',
                 backgroundColor: '#495C83',
@@ -118,7 +118,7 @@ export default function Post({
       <Typography
         sx={{
           fontSize: 24,
-          fontFamily: 'Homemade',
+          fontFamily: 'Dosis',
           textAlign: 'start',
         }}
         variant="p"

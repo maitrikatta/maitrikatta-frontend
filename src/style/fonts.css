@@ -3,32 +3,12 @@
   src: url('../fonts/space age.ttf');
 }
 @font-face {
-  font-family: 'apollo';
-  src: url('../fonts/APOLLO.otf');
-}
-@font-face {
-  font-family: roboto-thin;
-  src: url('../fonts/Roboto-Thin.ttf');
-}
-@font-face {
-  font-family: roboto-light;
-  src: url('../fonts/Roboto-Light.ttf');
-}
-@font-face {
-  font-family: Comic-ink;
-  src: url('../fonts/Comic-ink.ttf');
-}
-@font-face {
   font-family: Avenger;
   src: url('../fonts/Avenger.ttf');
 }
 @font-face {
-  font-family: Homemade;
-  src: url('../fonts/Homemade.ttf');
-}
-@font-face {
-  font-family: NewsPaper;
-  src: url('../fonts/KGMidnightMemories.ttf');
+  font-family: Dosis;
+  src: url('../fonts/Dosis.ttf');
 }
 body {
   padding: 0 !important;

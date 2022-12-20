@@ -32,10 +32,10 @@ function TheHeader({ userName, profilePath, ellipse, PostHeading }) {
           backgroundColor: '#002B5B',
         },
         '& .MuiCardHeader-title': {
-          fontFamily: 'Comic-ink',
+          fontFamily: 'Dosis',
         },
         '& .MuiCardHeader-subheader': {
-          fontFamily: 'monospace',
+          fontFamily: 'Arial, sans-serif',
         },
         '& .MuiAvatar-circular': {
           border: '2px solid #FB3640',
