@@ -22,13 +22,14 @@ function ExpandPost() {
   return (
     <Paper
       component="article"
-      elevation={6}
+      // elevation={6}
       sx={{
         maxWidth: { sm: '100%', md: '700px' },
-        padding: 4,
+        padding: { xs: 2, md: 4 },
         display: 'flex',
         flexDirection: 'column',
         gap: 2,
+        // borderRadius: 2,
         boxShadow: '0px 0px 2px black',
       }}
     >

@@ -25,7 +25,7 @@ function TheHeader({ userName, profilePath, ellipse, PostHeading }) {
           <MoreVertIcon />
         </IconButton>
       }
-      title={`${PostHeading.substring(0, 50).trim()}${ellipse}`}
+      title={`${PostHeading.substring(0, 70).trim()}${ellipse}`}
       subheader={`${userName}`}
       sx={{
         '& .MuiCard-root': {
@@ -33,9 +33,10 @@ function TheHeader({ userName, profilePath, ellipse, PostHeading }) {
         },
         '& .MuiCardHeader-title': {
           fontFamily: 'Dosis',
+          fontSize: '1.1rem',
         },
         '& .MuiCardHeader-subheader': {
-          fontFamily: 'Arial, sans-serif',
+          fontFamily: 'Dosis',
         },
         '& .MuiAvatar-circular': {
           border: '2px solid #FB3640',

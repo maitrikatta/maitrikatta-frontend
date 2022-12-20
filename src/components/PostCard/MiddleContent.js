@@ -6,11 +6,9 @@ function MiddleContent({ Content }) {
       <Typography
         variant="body2"
         sx={{
-          fontSize: '1.1rem',
           textAlign: 'start',
           fontFamily: 'Dosis',
-          fontWeight: 'bold',
-          letterSpacing: '1px',
+          fontSize: { md: '1.2rem' },
         }}
       >
         {`${Content.substring(0, 150).trim()}...`}

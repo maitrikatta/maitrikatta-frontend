@@ -25,7 +25,7 @@ function Hero({ children }) {
 
           flexDirection: 'row',
           gap: 2,
-          p: 2,
+          padding: { xs: 1, md: 4 },
           flexWrap: 'wrap',
           justifyContent: { xs: 'center' },
           alignItems: 'start',
