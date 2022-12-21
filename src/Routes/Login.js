@@ -5,7 +5,6 @@ import {
   TextField,
   InputAdornment,
   Button,
-  Icon,
   Typography,
   Paper,
 } from '@mui/material';
@@ -13,16 +12,20 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import AlternateEmailOutlinedIcon from '@mui/icons-material/AlternateEmailOutlined';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import noAuthAxios from '../axios/noAuthAxios';
-import ErrorIcon from '@mui/icons-material/Error';
 import { useEffect } from 'react';
+import Logo from '../components/Logo';
+import LogoWhite from '../components/LogoWhite';
+import MySnackbar from './Login/MySnackbar';
+import { useGlobalContext } from '../context';
 function Login() {
   const navigate = useNavigate();
+  const { darkMode } = useGlobalContext();
   const [form, setForm] = useState({
     email: '',
     password: '',
   });
   const [windowHeight, setWindowHeight] = useState(800);
-  const [axiosError, setAxiosError] = useState();
+  const [axiosError, setAxiosError] = useState(false);
   const [error, setError] = useState({
     emailErr: null,
     passwordErr: null,
@@ -105,65 +108,47 @@ function Login() {
         display: 'flex',
         // paddingTop: '5%',
         width: '100%',
+        alignItems: 'start',
+        justifyContent: 'start',
         height: windowHeight,
         boxSizing: 'border-box',
       }}
     >
+      {axiosError && <MySnackbar msg={axiosError} severity="error" />}
       <Paper
-        elevation={4}
+        elevation={10}
         sx={{
           width: { xs: '90%', sm: '400px' },
           margin: '10% auto',
-          height: '450px',
+          // height: '450px',
+          paddingTop: 2,
+          paddingBottom: 2,
           display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
           justifyContent: 'center',
-          boxShadow: '0px 0px 3px black',
+          fontFamily: 'Dosis',
+          boxShadow: '0 0 2px black',
         }}
       >
+        {darkMode ? (
+          <LogoWhite width="80" height="80" />
+        ) : (
+          <Logo width="80" height="80" />
+        )}
         <Box
           component="form"
           sx={{
             display: 'flex',
             flexDirection: 'column',
+            alignItems: 'stretch',
+            justifyContent: 'start',
             gap: '25px',
-            paddingTop: '20px',
+            padding: '20px',
           }}
           action="#"
           onSubmit={(e) => validate(e)}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 1,
-              alignSelf: 'stretch',
-              textAlign: 'center',
-              height: '30px',
-              '&.MuiBox-root': {
-                bgcolor: '#f44336',
-              },
-              visibility: axiosError ? 'unset' : 'hidden',
-            }}
-          >
-            <Icon sx={{ ml: 1, color: 'white' }}>
-              <ErrorIcon />
-            </Icon>
-            <Typography sx={{ color: 'white' }}>{axiosError}</Typography>
-          </Box>
-          <div>
-            <Typography
-              sx={{
-                fontFamily: 'apollo',
-                fontSize: '1.2rem',
-                color: 'primary.brand',
-                letterSpacing: '2px',
-                margin: 'auto',
-              }}
-            >
-              Login
-            </Typography>
-          </div>
-
           <div>
             <TextField
               onChange={(e) => {
@@ -218,23 +203,28 @@ function Login() {
           <div>
             <Button
               size="medium"
-              color="primary"
               type="submit"
+              color="success"
               variant="contained"
+              sx={{
+                width: '100%',
+                boxShadow: '0 0 2px black',
+              }}
             >
               Login
             </Button>
           </div>
           <div>
-            <p>
+            <Typography sx={{ textAlign: 'center', fontFamily: 'Dosis' }}>
               Don't have an account{'  '}
-              <a
-                style={{ color: 'blue', textDecoration: 'none' }}
+              <Box
+                component="a"
+                sx={{ color: 'primary.main', textDecoration: 'none' }}
                 href="register"
               >
                 Register
-              </a>
-            </p>
+              </Box>
+            </Typography>
           </div>
         </Box>
       </Paper>

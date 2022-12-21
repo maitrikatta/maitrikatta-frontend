@@ -16,7 +16,7 @@ export function AppProvider({ children }) {
   };
 
   //DARK THEME CHECKBOX
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState();
 
   //STORE APPBAR HEIGHT TO COMPUTE REST OF VIEWPORT
   const [appBarHeight, setAppBarHeight] = useState();
@@ -26,6 +26,9 @@ export function AppProvider({ children }) {
     const storedThemeChoice = localStorage.getItem('darkMode');
     if (storedThemeChoice === 'true') {
       setDarkMode(true);
+    } else if (storedThemeChoice == null) {
+      // first fresh visit, when no choice made
+      setDarkMode(true); // default theme
     } else {
       setDarkMode(false);
     }
