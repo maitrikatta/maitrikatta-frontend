@@ -84,7 +84,7 @@ function SideBarMenu() {
                   <ListItemText>
                     <Typography
                       sx={{
-                        fontFamily: 'apollo',
+                        fontFamily: 'Dosis',
                         letterSpacing: '2px',
                         '&.MuiTypography-root': {
                           color: activeListItem === index && 'primary.white',

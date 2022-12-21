@@ -19,9 +19,9 @@ function App() {
       mode: darkMode ? 'dark' : 'light',
       primary: {
         main: '#1178f2',
-        mainTrans: 'rgba(10, 25, 41, 0.8)',
         white: '#FFFFFF',
         brand: '#1178f2',
+        mainTrans: 'rgba(10, 25, 41, 0.8)',
       },
       secondary: {
         main: '#0a1929',

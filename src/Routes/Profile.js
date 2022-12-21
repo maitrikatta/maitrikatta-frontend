@@ -1,20 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import authAxios from '../axios/authAxios';
-import defaultProfile from '../assets/img/profile.jpg';
 import setImageBlob from '../lib/setImageBlob';
-import {
-  Paper,
-  Typography,
-  Box,
-  Button,
-  IconButton,
-  TextField,
-  Divider,
-} from '@mui/material';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import PhotoCamera from '@mui/icons-material/PhotoCamera';
-
+import { Paper, Divider } from '@mui/material';
+import Personal from './Profile/Personal';
+import About from './Profile/About';
 const initialState = {
   name: 'Your Name',
   bio: 'Describe your self in few words',
@@ -107,7 +97,7 @@ function Profile() {
     <Paper
       elevation={6}
       sx={{
-        width: { xs: '100%', sm: '100%', lg: '50%' },
+        width: { xs: '100%', md: '450px', lg: '50%' },
         boxShadow: 1,
       }}
     >
@@ -118,176 +108,9 @@ function Profile() {
           sendData(event);
         }}
       >
-        <Box
-          component="header"
-          sx={{
-            display: 'flex',
-            width: '100%',
-            alignItems: 'center',
-            justifyItems: 'center',
-            padding: 2,
-            gap: 3,
-            justifyContent: 'center',
-            flexWrap: { xs: 'wrap', md: 'nowrap' },
-          }}
-        >
-          <Box aria-label="profile picture">
-            <Box
-              component="div"
-              sx={{
-                width: { xs: '100px', sm: '150px' },
-                height: { xs: '100px', sm: '150px' },
-                borderRadius: '50%',
-                overflow: 'hidden',
-                display: 'flex',
-                justifyContent: 'center',
-                position: 'relative',
-              }}
-            >
-              <img ref={imgRef} src={defaultProfile} alt="" />
-              <IconButton
-                aria-label="upload picture"
-                component="label"
-                sx={{
-                  color: profile.isFileSelected ? '#008140' : 'secondary',
-                  position: 'absolute',
-                  bottom: -4,
-                }}
-              >
-                <input
-                  onChange={() =>
-                    setProfile((prevState) => {
-                      return { ...prevState, setIsFileSelected: true };
-                    })
-                  }
-                  name="profile"
-                  required
-                  hidden
-                  accept="image/*"
-                  type="file"
-                />
-                <PhotoCamera />
-              </IconButton>
-            </Box>
-          </Box>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-            <Box
-              sx={{
-                display: 'flex',
-                gap: 2,
-                flexWrap: 'wrap-reverse',
-                alignContent: 'center',
-                alignItems: 'center',
-                justifyContent: { xs: 'center', sm: 'start' },
-              }}
-            >
-              <Typography
-                noWrap={true}
-                variant="h5"
-                sx={{ fontFamily: 'roboto-thin' }}
-              >
-                {profile.name}
-              </Typography>
-              <Button
-                size="small"
-                sx={{ color: 'primary.brand' }}
-                variant="outlined"
-                // onClick={() => {
-                //   setDisable(!disable);
-                // }}
-              >
-                Edit Profile
-              </Button>
-              <IconButton>
-                <SettingsOutlinedIcon />
-              </IconButton>
-            </Box>
-            <Box
-              sx={{
-                display: 'flex',
-                gap: 1,
-                justifyContent: { xs: 'center', sm: 'start' },
-              }}
-            >
-              <Typography variant="body2" sx={{ fontFamily: 'roboto-light' }}>
-                7 Posts
-              </Typography>
-              <Typography variant="body2" sx={{ fontFamily: 'roboto-light' }}>
-                120 Followers
-              </Typography>
-              <Typography variant="body2" sx={{ fontFamily: 'roboto-light' }}>
-                125 Following
-              </Typography>
-            </Box>
-            <Box>
-              <Typography
-                component="p"
-                variant="p"
-                sx={{
-                  fontFamily: 'roboto-light',
-                  fontSize: '0.8rem',
-                  textAlign: { xs: 'center', sm: 'start' },
-                }}
-              >
-                {profile.bio}
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
+        <Personal personalData={{ imgRef, profile, setProfile }} />
         <Divider />
-        <Box
-          component="section"
-          sx={{
-            m: 3,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'stretch',
-            gap: 4,
-          }}
-        >
-          <TextField
-            disabled={true}
-            value={profile.name}
-            label="name"
-            size="small"
-          ></TextField>
-          <TextField
-            disabled={profile.disable}
-            onChange={(ev) => {
-              setProfile((prevState) => {
-                return { ...prevState, college: ev.target.value };
-              });
-            }}
-            value={profile.college}
-            required
-            name="college"
-            label="college"
-            size="small"
-          ></TextField>
-          <TextField
-            label="Your Bio"
-            required
-            disabled={profile.disable}
-            onChange={(ev) =>
-              setProfile((prevState) => {
-                return { ...prevState, bio: ev.target.value };
-              })
-            }
-            name="bio"
-            value={profile.bio}
-            // multiline
-            maxRows={1}
-          ></TextField>
-          <Box>
-            <Button
-              type="submit"
-              disabled={profile.disable}
-              variant="contained"
-            >
-              Submit
-            </Button>
-          </Box>
-        </Box>
+        <About personalData={{ profile, setProfile }} />
       </form>
     </Paper>
   );

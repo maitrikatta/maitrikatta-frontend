@@ -16,7 +16,7 @@ export function AppProvider({ children }) {
   };
 
   //DARK THEME CHECKBOX
-  const [darkMode, setDarkMode] = useState();
+  const [darkMode, setDarkMode] = useState(true);
 
   //STORE APPBAR HEIGHT TO COMPUTE REST OF VIEWPORT
   const [appBarHeight, setAppBarHeight] = useState();
