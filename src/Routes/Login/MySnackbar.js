@@ -30,7 +30,7 @@ function MySnackbar({ msg, severity }) {
       key={msg}
     >
       <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
-        Invalid Credentials
+        {msg}
       </Alert>
     </Snackbar>
   );

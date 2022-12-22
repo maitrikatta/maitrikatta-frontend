@@ -1,3 +1,11 @@
+/* below lines are necessory in mui */
+/* removes bug */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 @font-face {
   font-family: 'space';
   src: url('../fonts/space age.ttf');

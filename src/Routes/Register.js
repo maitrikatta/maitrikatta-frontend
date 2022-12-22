@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import noAuthAxios from '../axios/noAuthAxios';
 import { useNavigate } from 'react-router-dom';
-import ErrorIcon from '@mui/icons-material/Error';
-import register from '../style/register.module.css';
 import {
   TextField,
+  Typography,
   InputAdornment,
   Button,
-  Icon,
-  Typography,
   Paper,
   Box,
 } from '@mui/material';
@@ -16,10 +13,14 @@ import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import AlternateEmailOutlinedIcon from '@mui/icons-material/AlternateEmailOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { useGlobalContext } from '../context';
+import MySnackbar from '../Routes/Login/MySnackbar';
+import { ReactComponent as WhiteLogo } from '../assets/img/white-logo.svg';
+import { ReactComponent as BlackLogo } from '../assets/img/black-logo.svg';
 function Register() {
   const [axiosError, setAxiosError] = useState(false);
   const navigate = useNavigate();
-
+  const { darkMode } = useGlobalContext();
   //removes bug: window scrolling on mobile
   const [windowHeight, setWindowHeight] = useState(800);
   const [form, setForm] = useState({
@@ -117,67 +118,37 @@ function Register() {
   }, []);
 
   return (
-    <Box
+    <Paper
       component="section"
+      elevation={0}
+      square
       sx={{
         width: '100%',
         height: windowHeight,
-        background: 'rgb(5, 0, 36)',
-        background:
-          'linear-gradient(-120deg,rgb(3, 28, 65) 0%,rgba(89, 110, 133, 1) 50%,rgba(0, 30, 60, 1) 100%)',
         backgroundSize: 'cover',
+        display: 'flex',
+        paddingTop: { xs: 4 },
+        flexDirection: 'column',
+        justifyContent: { md: 'space-evenly' },
+        alignItems: 'center',
       }}
     >
-      <Box
-        component="form"
-        sx={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-        action="#"
-        onSubmit={(e) => validate(e)}
-      >
+      {axiosError && <MySnackbar msg={axiosError} severity="error" />}
+      <Box component="form" action="#" onSubmit={(e) => validate(e)}>
         <Paper
-          elevation={16}
-          square
+          elevation={4}
           sx={{
-            width: { xs: '85%', sm: '450px', md: '500px' },
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'flex-start',
-            alignItems: 'center',
+            alignItems: 'stretch',
             gap: '20px',
+            borderRadius: 2,
             textAlign: 'center',
-            p: 3,
+            p: 4,
           }}
         >
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 1,
-              alignSelf: 'stretch',
-              textAlign: 'center',
-              height: '30px',
-              '&.MuiBox-root': {
-                bgcolor: '#f44336',
-              },
-              visibility: axiosError ? 'unset' : 'hidden',
-            }}
-          >
-            <Icon sx={{ ml: 1, color: 'white' }}>
-              <ErrorIcon />
-            </Icon>
-            <Typography sx={{ color: 'white' }}>{axiosError}</Typography>
-          </Box>
-          <div className={register.snippet}>
-            <p className={register.heading}>maitrikatta</p>
-          </div>
-
-          <div className={register.snippet}>
+          <Box>{darkMode ? <WhiteLogo /> : <BlackLogo />}</Box>
+          <Box>
             <TextField
               onChange={(e) =>
                 setForm({ ...form, name: e.target.value.trim() })
@@ -200,8 +171,8 @@ function Register() {
                 ),
               }}
             />
-          </div>
-          <div className={register.snippet}>
+          </Box>
+          <Box>
             <TextField
               onChange={(e) => {
                 setForm({ ...form, email: e.target.value.trim() });
@@ -223,10 +194,13 @@ function Register() {
                 ),
               }}
             />
-          </div>
-          <div className={register.snippet}>
+          </Box>
+          <Box>
             <TextField
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
+              onChange={(e) => {
+                setForm({ ...form, password: e.target.value });
+                setAxiosError(false);
+              }}
               variant="outlined"
               label="password"
               color={error.passwordErr ? 'error' : 'primary'}
@@ -248,20 +222,32 @@ function Register() {
                 ),
               }}
             />
-          </div>
-          <div className={register.snippet}>
-            <Button color="primary" type="submit" variant="contained">
+          </Box>
+          <Box>
+            <Button
+              sx={{ width: '100%' }}
+              color="success"
+              type="submit"
+              variant="contained"
+            >
               Register
             </Button>
-          </div>
-          <div className={register.snippet}>
-            <p className={register.sign}>
-              Have an account <a href="login">Log-In</a>
-            </p>
+          </Box>
+          <div>
+            <Typography sx={{ textAlign: 'center', fontFamily: 'Dosis' }}>
+              Have an account{' '}
+              <Box
+                component="a"
+                sx={{ color: 'primary.main', textDecoration: 'none' }}
+                href="login"
+              >
+                Log-In
+              </Box>
+            </Typography>
           </div>
         </Paper>
       </Box>
-    </Box>
+    </Paper>
   );
 }
 

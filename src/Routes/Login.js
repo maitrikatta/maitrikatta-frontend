@@ -13,8 +13,8 @@ import AlternateEmailOutlinedIcon from '@mui/icons-material/AlternateEmailOutlin
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import noAuthAxios from '../axios/noAuthAxios';
 import { useEffect } from 'react';
-import Logo from '../components/Logo';
-import LogoWhite from '../components/LogoWhite';
+import { ReactComponent as WhiteLogo } from '../assets/img/white-logo.svg';
+import { ReactComponent as BlackLogo } from '../assets/img/black-logo.svg';
 import MySnackbar from './Login/MySnackbar';
 import { useGlobalContext } from '../context';
 function Login() {
@@ -102,7 +102,7 @@ function Login() {
   return (
     <Paper
       component="main"
-      elevation={16}
+      elevation={0}
       square
       sx={{
         display: 'flex',
@@ -116,26 +116,19 @@ function Login() {
     >
       {axiosError && <MySnackbar msg={axiosError} severity="error" />}
       <Paper
-        elevation={10}
+        elevation={4}
         sx={{
-          width: { xs: '90%', sm: '400px' },
-          margin: '10% auto',
-          // height: '450px',
-          paddingTop: 2,
-          paddingBottom: 2,
+          margin: 'auto',
+          borderRadius: 2,
           display: 'flex',
+          padding: 4,
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           fontFamily: 'Dosis',
-          boxShadow: '0 0 2px black',
         }}
       >
-        {darkMode ? (
-          <LogoWhite width="80" height="80" />
-        ) : (
-          <Logo width="80" height="80" />
-        )}
+        <Box>{darkMode ? <WhiteLogo /> : <BlackLogo />}</Box>
         <Box
           component="form"
           sx={{
@@ -155,10 +148,10 @@ function Login() {
                 setForm({ ...form, email: e.target.value.trim() });
                 setAxiosError(false);
               }}
+              size="small"
               variant="outlined"
               label="email"
               placeholder="enter your email"
-              size="medium"
               helperText={error.emailErr}
               type="email"
               inputRef={emailRef}
@@ -179,11 +172,11 @@ function Login() {
                 setForm({ ...form, password: e.target.value });
                 setAxiosError(false);
               }}
+              size="small"
               variant="outlined"
               label="password"
               color={error.passwordErr ? 'error' : 'primary'}
               placeholder="create new password"
-              size="medium"
               type={hide ? 'password' : 'text'}
               helperText={error.passwordErr}
               inputRef={passRef}
