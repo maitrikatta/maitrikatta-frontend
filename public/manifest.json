@@ -1,25 +1,63 @@
 {
   "short_name": "maitrikatta",
-  "name": "a social site",
+  "name": "Maitrikatta",
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "128x128 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "logo-512.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "512x512",
+      "purpose": "any"
     },
     {
-      "src": "logo512.png",
+      "src": "logo-512-maskable.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#1178f2",
-  "background_color": "#ffffff"
+  "theme_color": "#439a97",
+  "background_color": "#ffffff",
+  "description": "a place where scholars meet",
+  "dir": "auto",
+  "lang": "en",
+  "orientation": "portrait",
+  "shortcuts": [
+    {
+      "name": "Profile",
+      "url": "/profile",
+      "icons": [
+        {
+          "src": "assets/profile-128.png"
+        }
+      ],
+      "description": "view and edit profile"
+    },
+    {
+      "name": "Post",
+      "url": "/post",
+      "icons": [
+        {
+          "src": "assets/post-128.png"
+        }
+      ],
+      "description": "Post your ideas"
+    },
+    {
+      "name": "Feed",
+      "url": "/feed",
+      "icons": [
+        {
+          "src": "assets/feed-128.png"
+        }
+      ],
+      "description": "See your activity"
+    }
+  ]
 }

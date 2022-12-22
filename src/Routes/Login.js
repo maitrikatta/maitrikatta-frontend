@@ -105,20 +105,19 @@ function Login() {
       elevation={0}
       square
       sx={{
-        display: 'flex',
-        // paddingTop: '5%',
         width: '100%',
-        alignItems: 'start',
-        justifyContent: 'start',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: { xs: 'start', md: 'space-evenly' },
+        paddingTop: { xs: 4 },
+        alignItems: 'center',
         height: windowHeight,
-        boxSizing: 'border-box',
       }}
     >
       {axiosError && <MySnackbar msg={axiosError} severity="error" />}
       <Paper
         elevation={4}
         sx={{
-          margin: 'auto',
           borderRadius: 2,
           display: 'flex',
           padding: 4,
@@ -137,7 +136,6 @@ function Login() {
             alignItems: 'stretch',
             justifyContent: 'start',
             gap: '25px',
-            padding: '20px',
           }}
           action="#"
           onSubmit={(e) => validate(e)}
