@@ -8,13 +8,19 @@
       "type": "image/x-icon"
     },
     {
+      "src": "logo-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
       "src": "logo-512.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "any"
     },
     {
-      "src": "logo-512-maskable.png",
+      "src": "logo-maskable.png",
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "maskable"
@@ -23,7 +29,7 @@
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#439a97",
-  "background_color": "#ffffff",
+  "background_color": "#fafafa",
   "description": "a place where scholars meet",
   "dir": "auto",
   "lang": "en",
