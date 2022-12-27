@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Snackbar, Alert, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-function MySnackbar({ msg, severity }) {
-  const [open, setOpen] = useState(true);
+function NewSnackbar({ msg, severity, setOpenSnack, openSnack }) {
   const handleClose = () => {
-    setOpen(false);
+    setOpenSnack(false);
   };
   const action = (
     <React.Fragment>
@@ -20,14 +19,14 @@ function MySnackbar({ msg, severity }) {
   );
   return (
     <Snackbar
-      open={open}
+      open={openSnack}
       message={msg}
       anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       action={action}
       // TransitionComponent={transition}
       autoHideDuration={6000}
       onClose={handleClose}
-      key={msg + Math.random()}
+      key={msg}
     >
       <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
         {msg}
@@ -36,4 +35,4 @@ function MySnackbar({ msg, severity }) {
   );
 }
 
-export default MySnackbar;
+export default NewSnackbar;

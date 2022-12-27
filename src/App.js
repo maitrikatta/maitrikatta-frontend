@@ -11,6 +11,7 @@ import CreatePost from './Routes/CreatePost';
 import { createTheme, ThemeProvider } from '@mui/material';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useGlobalContext } from './context';
+import { green } from '@mui/material/colors';
 import Feed from './Routes/Feed';
 function App() {
   const { darkMode } = useGlobalContext();
@@ -24,7 +25,7 @@ function App() {
         mainTrans: 'rgba(10, 25, 41, 0.8)',
       },
       secondary: {
-        main: '#0a1929',
+        main: green[400],
       },
     },
   });
