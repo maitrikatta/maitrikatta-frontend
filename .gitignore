@@ -10,6 +10,7 @@
 /build
 # src/assets/
 *.png
+*.gif
 # misc
 .DS_Store
 .env.local

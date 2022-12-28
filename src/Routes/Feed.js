@@ -23,10 +23,14 @@ function Feed() {
       if (res?.data?.length > 0) {
         let newPosts = res.data;
         setState({ ...state, postList: newPosts, loading: false });
+      } else {
+        setState({ ...state, loading: false });
+        alert('You havent posted any thing yet');
       }
     } catch (error) {
-      if (error.code === 'ERR_BAD_REQUEST') {
-      }
+      setState({ ...state, loading: false });
+      alert('please login first.');
+      if (error.response.status === 401) console.log('Please login');
     }
   }
   useEffect(() => {

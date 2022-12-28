@@ -53,6 +53,7 @@ function PostCard({
         flexBasis: { xs: 280, sm: 390 },
         flexGrow: { xs: 1, sm: 0 },
         boxShadow: '2',
+        '& .MuiCardHeader-title': { wordBreak: 'break-all' },
       }}
     >
       <Box

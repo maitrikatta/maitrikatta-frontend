@@ -9,16 +9,16 @@ noAuthAxios.interceptors.response.use(
   },
   (error) => {
     if (error?.response?.status === 401) {
-      console.log('401 ERROR');
+      // not logged in
       return Promise.reject(error);
     }
     if (error?.response?.code === 'ERR_NETWORK') {
       alert('Network Error');
       return Promise.reject(error);
     }
-    // if no error matches should return error
+    // if no error matches, should return error
     // otherwise try catch wont get error obj
-    return error;
+    return Promise.reject(error);
   }
 );
 export default noAuthAxios;

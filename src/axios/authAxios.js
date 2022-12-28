@@ -11,6 +11,7 @@ authAxios.interceptors.request.use(
   },
   (error) => {
     console.log(`auth not found :${error}`);
+    return Promise.reject(error);
   }
 );
 authAxios.interceptors.response.use(
@@ -19,9 +20,9 @@ authAxios.interceptors.response.use(
   },
   (error) => {
     if (error?.response?.status === 401) {
-      console.log('401 ERROR');
       return Promise.reject(error);
     }
+    return Promise.reject(error);
   }
 );
 export default authAxios;
