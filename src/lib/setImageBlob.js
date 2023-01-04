@@ -1,5 +1,5 @@
 import noAuthAxios from '../axios/noAuthAxios';
-import gif from '../assets/img/404_Image.gif';
+import error from '../assets/img/error.png';
 async function setImageBlob({ route, targetRef, imgKey }) {
   try {
     const { data: blob } = await noAuthAxios.get(`/${route}/${imgKey}`, {
@@ -13,7 +13,7 @@ async function setImageBlob({ route, targetRef, imgKey }) {
       targetRef.current.src = URL.createObjectURL(blob);
     }
   } catch (err) {
-    if (err?.response?.status === 410) targetRef.current.src = gif;
+    if (err?.response?.status === 410) targetRef.current.src = error;
   }
 }
 export default setImageBlob;

@@ -47,7 +47,7 @@ function CreatePost() {
     }
   }
   useEffect(() => {
-    if (state.universalError != false) setOpenSnack(true);
+    if (state.universalError !== false) setOpenSnack(true);
   }, [state]);
   return (
     <>

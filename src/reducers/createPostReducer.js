@@ -94,7 +94,7 @@ const countWords = (text) => {
 const validateHeading = (text) => {
   const len = countWords(text);
   if (len < 6) return [true, 'Heading must contain more than 5 words'];
-  else if (len > 20) return [true, 'Heading must contain less than 20 words'];
+  // else if (len > 20) return [true, 'Heading must contain less than 20 words'];
   else return [false, `word length ${len}`];
 };
 

@@ -19,7 +19,7 @@ function useObserveLastDiv(myRef, makeRequest) {
     };
   }, [posts]);
   useEffect(() => {
-    console.log(pageNo);
+    console.log('Infinite Scroll Page:', pageNo);
     if (pageNo > 1) makeRequest(pageNo);
   }, [pageNo]);
 }

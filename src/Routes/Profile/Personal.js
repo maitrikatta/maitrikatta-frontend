@@ -8,7 +8,7 @@ import defaultProfile from '../../assets/img/profile.jpg';
 
 const MyIconButton = styled(IconButton)({
   color: 'primary.white',
-  border: '1px solid rgba(255,255,255,0.4)',
+  border: '1px solid gray',
   '&.MuiButton-root': {
     padding: '3px',
     minWidth: 'auto',
@@ -43,7 +43,7 @@ function Personal({ personalData }) {
             width: { xs: '100px', sm: '150px' },
             height: { xs: '100px', sm: '150px' },
             borderRadius: '50%',
-            overflow: '-moz-hidden-unscrollable',
+            overflow: 'hidden',
             display: 'flex',
             justifyContent: 'center',
           }}

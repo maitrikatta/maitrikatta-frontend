@@ -4,11 +4,11 @@ function MiddleContent({ Content }) {
   return (
     <CardContent>
       <Typography
-        variant="body2"
+        variant="body1"
         sx={{
           textAlign: 'start',
           fontFamily: 'Dosis',
-          fontSize: { md: '1.2rem' },
+          fontSize: '1.1rem',
         }}
       >
         {`${Content.substring(0, 150).trim()}...`}
