@@ -5,14 +5,17 @@ import OutlinedBookmark from '@mui/icons-material/BookmarkBorderOutlined';
 import authAxios from '../axios/authAxios';
 import React, { useState, useEffect } from 'react';
 import PostCard from '../components/PostCard';
-
+import LoginDialog from '../components/Dialog/LoginDialog';
 function Feed() {
   const [state, setState] = useState({
     activeItem: 0,
     loading: true,
     postList: [],
   });
-
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const handleDialogClose = () => {
+    setDialogOpen(false);
+  };
   const handleChange = (ev, activeItem) => {
     setState({ ...state, activeItem });
   };
@@ -29,8 +32,7 @@ function Feed() {
       }
     } catch (error) {
       setState({ ...state, loading: false });
-      alert('please login first.');
-      if (error.response.status === 401) console.log('Please login');
+      if (error.response.status === 401) setDialogOpen(true);
     }
   }
   useEffect(() => {
@@ -38,6 +40,12 @@ function Feed() {
   }, []);
   return (
     <>
+      <LoginDialog
+        handleDialogClose={handleDialogClose}
+        dialogOpen={dialogOpen}
+      >
+        Login to see your data and manage it.
+      </LoginDialog>
       <Box sx={{ width: '100%' }}>
         <Paper
           elevation={6}

@@ -63,7 +63,7 @@ function SideBarMenu() {
             <div key={index}>
               <ListItem
                 selected={activeListItem === index}
-                divider={true}
+                // divider={true}
                 disablePadding
                 sx={{
                   '&.Mui-selected': {

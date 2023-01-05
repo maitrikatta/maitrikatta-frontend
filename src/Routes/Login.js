@@ -46,7 +46,7 @@ function Login() {
       });
       const token = response.data.token;
       localStorage.setItem('token', 'Bearer ' + token);
-      navigate('/profile', { replace: true });
+      navigate(-1);
     } catch (error) {
       if (error.response.status === 401) {
         setAxiosError((prevState) => {
