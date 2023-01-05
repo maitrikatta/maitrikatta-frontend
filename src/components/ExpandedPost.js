@@ -43,8 +43,8 @@ export default function Post({
           loading="lazy"
           sx={{
             width: '100%',
-            height: '300px',
-            // objectFit: 'cover',
+            height: '350px',
+            // objectFit: 'contain',
             // objectPosition: '100% 25%',
             pointerEvents: 'none',
           }}

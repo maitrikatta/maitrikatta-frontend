@@ -29,7 +29,12 @@ function MySnackbar({ msg, severity }) {
       onClose={handleClose}
       key={msg + Math.random()}
     >
-      <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
+      <Alert
+        variant="filled"
+        onClose={handleClose}
+        severity={severity}
+        sx={{ width: '100%' }}
+      >
         {msg}
       </Alert>
     </Snackbar>

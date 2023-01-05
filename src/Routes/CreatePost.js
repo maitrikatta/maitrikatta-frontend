@@ -55,7 +55,7 @@ function CreatePost() {
         msg={state.universalError}
         openSnack={openSnack}
         setOpenSnack={setOpenSnack}
-        severity="error"
+        severity="warning"
       />
       <Paper
         component="form"

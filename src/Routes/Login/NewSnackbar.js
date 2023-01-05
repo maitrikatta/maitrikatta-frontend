@@ -28,7 +28,12 @@ function NewSnackbar({ msg, severity, setOpenSnack, openSnack }) {
       onClose={handleClose}
       key={msg}
     >
-      <Alert onClose={handleClose} severity={severity} sx={{ width: '100%' }}>
+      <Alert
+        variant="filled"
+        onClose={handleClose}
+        severity={severity}
+        sx={{ width: '100%' }}
+      >
         {msg}
       </Alert>
     </Snackbar>
