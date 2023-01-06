@@ -59,11 +59,7 @@ function TheHeader({ userName, profilePath, ellipse, PostHeading }) {
           backgroundColor: '#002B5B',
         },
         '& .MuiCardHeader-title': {
-          fontFamily: 'Dosis',
-          fontSize: '1.1rem',
-        },
-        '& .MuiCardHeader-subheader': {
-          fontFamily: 'Dosis',
+          fontFamily: 'Euclid',
         },
         '& .MuiAvatar-circular': {
           // border: '2px solid green',

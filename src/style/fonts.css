@@ -18,6 +18,10 @@
   font-family: Dosis;
   src: url('../fonts/Dosis.ttf');
 }
+@font-face {
+  font-family: Euclid;
+  src: url('../fonts/Euclid Circular A Regular.ttf');
+}
 body {
   padding: 0 !important;
   overflow: auto !important;

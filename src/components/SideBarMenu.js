@@ -68,6 +68,7 @@ function SideBarMenu() {
                 sx={{
                   '&.Mui-selected': {
                     backgroundColor: 'primary.mainTrans',
+                    borderRadius: '2%',
                   },
                 }}
               >

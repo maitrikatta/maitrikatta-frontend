@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import authAxios from '../axios/authAxios';
-import { Paper } from '@mui/material';
+import { Box } from '@mui/material';
 import ExpandedPost from '../components/ExpandedPost';
 import LoginDialog from '../components/Dialog/LoginDialog';
 function ExpandPost() {
@@ -33,7 +33,7 @@ function ExpandPost() {
       >
         To see full content and do more things. You have to login first
       </LoginDialog>
-      <Paper
+      <Box
         component="article"
         // elevation={6}
         sx={{
@@ -43,11 +43,11 @@ function ExpandPost() {
           flexDirection: 'column',
           gap: 2,
           // borderRadius: 2,
-          boxShadow: '0px 0px 2px black',
+          boxShadow: '0px 0px 2px gray',
         }}
       >
         {post ? <ExpandedPost {...post} /> : <h3>Loading...</h3>}
-      </Paper>
+      </Box>
     </>
   );
 }

@@ -76,8 +76,7 @@ export default function Post({
 
       <Typography
         sx={{
-          fontSize: { xs: '1.1rem', md: '1.3rem' },
-          fontFamily: 'Dosis',
+          fontSize: { xs: '1.2rem', md: '1.3rem' },
           textAlign: 'start',
         }}
         variant="p"

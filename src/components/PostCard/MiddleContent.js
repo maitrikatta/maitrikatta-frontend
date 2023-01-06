@@ -7,8 +7,6 @@ function MiddleContent({ Content }) {
         variant="body1"
         sx={{
           textAlign: 'start',
-          fontFamily: 'Dosis',
-          fontSize: '1.1rem',
         }}
       >
         {`${Content.substring(0, 150).trim()}...`}

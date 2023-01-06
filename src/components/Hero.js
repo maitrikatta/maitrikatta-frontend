@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { Toolbar, Paper } from '@mui/material';
+import { Toolbar, Box } from '@mui/material';
 import { drawerWidth } from './MyDrawer';
 import { useGlobalContext } from '../context';
 import useFetchData from '../lib/fetch-more-posts';
@@ -15,7 +15,7 @@ function Hero({ children }) {
   return (
     <>
       <Toolbar />
-      <Paper
+      <Box
         component="main"
         ref={myRef}
         sx={{
@@ -39,7 +39,7 @@ function Hero({ children }) {
         elevation={18}
       >
         {children}
-      </Paper>
+      </Box>
     </>
   );
 }

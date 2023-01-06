@@ -48,12 +48,12 @@ function PostCard({
 
   return (
     <Card
-      elevation={24}
+      elevation={8}
       sx={{
         flexBasis: { xs: 280, sm: 390 },
         flexGrow: { xs: 1, sm: 0 },
-        boxShadow: '2',
-        '& .MuiCardHeader-title': { wordBreak: 'break-all' },
+        // boxShadow: '0px 0px 2px gray',
+        // '& .MuiCardHeader-title': { wordBreak: 'break-all' },
       }}
     >
       <Box
