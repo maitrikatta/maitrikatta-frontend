@@ -35,7 +35,7 @@ function Hero({ children }) {
           boxSizing: 'border-box',
           position: 'relative',
         }}
-        square
+        square={'true'}
         elevation={18}
       >
         {children}

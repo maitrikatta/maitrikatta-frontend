@@ -49,7 +49,7 @@ function Feed() {
       <Box sx={{ width: '100%' }}>
         <Paper
           elevation={6}
-          square
+          square={'true'}
           component="nav"
           sx={{
             boxShadow: '0px 0px 2px black',
@@ -70,7 +70,7 @@ function Feed() {
         </Paper>
       </Box>
       {state.loading ? (
-        <CircularProgress sx={{ marginTop: 8 }} />
+        <CircularProgress color="primary" sx={{ marginTop: 8 }} />
       ) : (
         <Posts posts={state.postList} />
       )}

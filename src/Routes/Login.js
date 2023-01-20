@@ -103,7 +103,7 @@ function Login() {
     <Paper
       component="main"
       elevation={0}
-      square
+      square={'true'}
       sx={{
         width: '100%',
         display: 'flex',

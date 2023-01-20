@@ -121,7 +121,7 @@ function Register() {
     <Paper
       component="section"
       elevation={0}
-      square
+      square={'true'}
       sx={{
         width: '100%',
         height: windowHeight,
