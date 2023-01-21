@@ -1,12 +1,19 @@
-import React from 'react';
-import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
-import DeleteOutlined from '@mui/icons-material/DeleteOutlined';
-import ShareIcon from '@mui/icons-material/Share';
-import { Link } from 'react-router-dom';
-import { Button, CardActions, Tooltip, IconButton } from '@mui/material';
+import React from "react";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import DeleteOutlined from "@mui/icons-material/DeleteOutlined";
+import ShareIcon from "@mui/icons-material/Share";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import { Link } from "react-router-dom";
+import { Button, CardActions, Tooltip, IconButton } from "@mui/material";
 function CardAction({ deleteOption, handleDeletePost, postId }) {
+  console.log("Ran");
   return (
     <CardActions disableSpacing>
+      <Tooltip title="like">
+        <IconButton>
+          <FavoriteBorderIcon />
+        </IconButton>
+      </Tooltip>
       <Tooltip title="bookmark">
         <IconButton>
           <BookmarkBorderIcon />
@@ -27,9 +34,9 @@ function CardAction({ deleteOption, handleDeletePost, postId }) {
       <Link
         to={`/expand/${postId}`}
         style={{
-          marginLeft: 'auto',
-          textDecoration: 'none',
-          color: 'gray',
+          marginLeft: "auto",
+          textDecoration: "none",
+          color: "gray",
         }}
       >
         <Button variant="link">Read More</Button>
@@ -38,4 +45,4 @@ function CardAction({ deleteOption, handleDeletePost, postId }) {
   );
 }
 
-export default CardAction;
+export default React.memo(CardAction);

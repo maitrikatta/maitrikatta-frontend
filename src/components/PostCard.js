@@ -1,10 +1,11 @@
-import CardAction from './PostCard/CardAction';
-import MiddleContent from './PostCard/MiddleContent';
-import TheHeader from './PostCard/TheHeader';
-import customAxios from '../axios/authAxios';
-import setImageBlob from '../lib/setImageBlob';
-import { useEffect, useState, useRef } from 'react';
-import { Box, Card, CardMedia } from '@mui/material';
+import CardAction from "./PostCard/CardAction";
+import MiddleContent from "./PostCard/MiddleContent";
+import TheHeader from "./PostCard/TheHeader";
+import customAxios from "../axios/authAxios";
+import setImageBlob from "../lib/setImageBlob";
+import { useCallback } from "react";
+import { useEffect, useState, useRef } from "react";
+import { Box, Card, CardMedia } from "@mui/material";
 function PostCard({
   createdBy,
   PostHeading,
@@ -13,9 +14,9 @@ function PostCard({
   picturePath,
   deleteOption,
 }) {
-  const [profilePath, setProfilePath] = useState('');
-  const [userName, setUserName] = useState('');
-  const ellipse = PostHeading.length > 30 ? '...' : '';
+  const [profilePath, setProfilePath] = useState("");
+  const [userName, setUserName] = useState("");
+  const ellipse = PostHeading.length > 30 ? "..." : "";
   const imgRef = useRef(null);
   async function fetchUser() {
     const response = await customAxios(`/profile/${createdBy}`);
@@ -28,16 +29,16 @@ function PostCard({
     }
   }
 
-  async function handleDeletePost(ev) {
+  const handleDeletePost = useCallback(async function (ev) {
     try {
       const res = await customAxios.delete(`/posts/${postId}`);
       console.log(res);
     } catch (error) {
-      console.error('Cant delete post!');
+      console.error("Cant delete post!");
     }
-  }
+  }, []);
   function getImage() {
-    const route = 'images/public/posts';
+    const route = "images/public/posts";
     const imgKey = picturePath;
     setImageBlob({ route, targetRef: imgRef, imgKey });
   }
@@ -76,8 +77,8 @@ function PostCard({
         height="194"
         alt="Loading image..."
         sx={{
-          objectFit: 'cover',
-          objectPosition: '0 15%',
+          objectFit: "cover",
+          objectPosition: "0 15%",
         }}
       />
       <MiddleContent Content={Content} />
