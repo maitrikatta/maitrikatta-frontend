@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from "axios";
 
 const noAuthAxios = axios.create({
-  baseURL: 'https://maitrikatta.com/api/v1',
+  baseURL: "https://maitrikatta.com/api/v1",
 });
 noAuthAxios.interceptors.response.use(
   (response) => {
@@ -12,8 +12,8 @@ noAuthAxios.interceptors.response.use(
       // not logged in
       return Promise.reject(error);
     }
-    if (error?.response?.code === 'ERR_NETWORK') {
-      alert('Network Error');
+    if (error?.response?.code === "ERR_NETWORK") {
+      alert("Network Error");
       return Promise.reject(error);
     }
     // if no error matches, should return error
@@ -21,4 +21,15 @@ noAuthAxios.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+noAuthAxios.interceptors.request.use(
+  (request) => {
+    request.headers.common["Authorization"] = localStorage.getItem("token");
+    return request;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 export default noAuthAxios;
