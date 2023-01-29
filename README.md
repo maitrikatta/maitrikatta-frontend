@@ -1,8 +1,9 @@
-# The front end code of maitrikatta. 
+# The front end code of [maitrikatta.com](https://maitrikatta.com). 
 ### Index
-- Geting Started
-  - How to run
-  - How to build
+- Getting Started
+  - How to Run
+  - How to Build
+  - Project Structure
 - Branches
   - master
   - production
@@ -14,3 +15,7 @@
   - Serious bottlenecks.
   - Bad code.
 - what features are coming
+  - [ ] Spliting massive grid of posts like Instagram and Linkedin
+  - [ ] Users can fill their college details
+  - [ ] Moving sidebar of mobile screen to bottom action bar
+  - [ ] Post categories into dynamic chips like YouTube
